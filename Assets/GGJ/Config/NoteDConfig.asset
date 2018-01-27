@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f03e384766c44528a9bbe4c4d81563, type: 3}
   m_Name: NoteDConfig
   m_EditorClassIdentifier: 
-  Note: {fileID: 8300000, guid: fffcbb0c208d44cb08f14298cf177379, type: 3}
+  Note: {fileID: 8300000, guid: 9745eadc037e04993976781512bae307, type: 3}
   Sprite: {fileID: 21300000, guid: 557e910d23b449e459a4b0546cd03945, type: 3}
   button: Fire4
