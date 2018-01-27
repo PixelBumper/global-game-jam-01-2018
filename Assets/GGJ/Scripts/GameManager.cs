@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
         );
     }
 
-    public void rescued()
+    public void Rescued()
     {
         _ScoreChangesSubject.OnNext(Unit.Default);
     }
