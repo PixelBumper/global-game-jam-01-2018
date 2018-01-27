@@ -6,5 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/webgl-test.unity
-    guid: c5f204ce5d2b04d26b4b650519a1f30c
+    path: Assets/GGJ/Scenes/TutorialSymbols.unity
+    guid: eeb87dc65212b4b0191ff57a2ac48cbe
+  - enabled: 1
+    path: Assets/GGJ/Scenes/Main.unity
+    guid: fc64bb871336a43f290a88e25ee39233
+  - enabled: 1
+    path: Assets/GGJ/Scenes/ScoreScene.unity
+    guid: 034065eae8fb7954a89d0254184b60b1
