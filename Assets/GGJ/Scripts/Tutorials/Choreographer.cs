@@ -15,7 +15,7 @@ namespace GGJ.Scripts
         private void Start(){
 
             _coroutine = StartCoroutine(PlayHintsInSequence());
-            GameManager.Instance.FireChanges.Subscribe(firePressed => {
+            InputController.Instance.FireChanges.Subscribe(firePressed => {
 				if(_coroutine != null){
                     StopCoroutine(_coroutine);
                     _coroutine = null;

@@ -6,60 +6,31 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
-    private static GameManager _instance;
-
     [SerializeField] private GameSettings _gameSettings;
     public GameSettings GameSettings { get { return _gameSettings; } }
-
     public IObservable<long> ScoreChanges;
     public IObservable<TimeSpan> CountDown;
     public IObservable<EWorldStatus> WorldChanges;
-    public IObservable<EFire> FireChanges;
-
-	public static GameManager Instance {
-		get{
-			return _instance;
-		}
-	}
 
     private void Awake()
     {
-		if(_instance != null){
-			Destroy(gameObject);
-			return;
-		}
-		_instance = this;
-
-        DontDestroyOnLoad(gameObject);
-
         WorldChanges = Observable.EveryUpdate()
             .Where(_ => Input.GetKeyDown(KeyCode.Space))
             .Scan(EWorldStatus.Living, (status, l) => status.Advance());
 
         ScoreChanges = Observable.Interval(TimeSpan.FromSeconds(1));
 
-        FireChanges = Observable.EveryUpdate()
-            .SelectMany(
-                Enum.GetValues(typeof(EFire))
-                    .Cast<EFire>()
-                    .ToObservable()
-                    .Where(fire => Math.Abs(Input.GetAxis(fire.ToString())) > 0.2f && Input.GetButton(fire.ToString()))
-            );
-    }
-
-	public void OnGameStarted(){
-		var timer = TimeSpan.FromSeconds(_gameSettings.GameDurationSeconds);
+        var timer = TimeSpan.FromSeconds(_gameSettings.GameDurationSeconds);
 
         CountDown = Observable.Interval(TimeSpan.FromSeconds(1))
-			.TakeUntil(Observable.Timer(timer))
-			.Select(counter => timer.Subtract(TimeSpan.FromSeconds(counter)))
-			.StartWith(timer); // Immediately sent it off so everyone has a default value.
+            .TakeUntil(Observable.Timer(timer))
+            .Select(counter => timer.Subtract(TimeSpan.FromSeconds(counter)))
+            .StartWith(timer); // Immediately sent it off so everyone has a default value.
 
-		CountDown.Subscribe(
-			timeLeft => { /** No-op. */ },
-			Debug.LogException,
-			() => SceneManager.LoadScene("ScoreScene")
-		);
-	}
+        CountDown.Subscribe(
+            timeLeft => { /** No-op. */ },
+            Debug.LogException,
+            () => SceneManager.LoadScene("ScoreScene")
+        );
+    }
 }
