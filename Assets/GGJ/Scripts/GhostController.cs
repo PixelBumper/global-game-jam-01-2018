@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using GGJ.Scripts.ScriptableObjects;
 using UnityEngine;
 
+[RequireComponent(typeof(SphereCollider), typeof(AudioSource))]
 public class GhostController : MonoBehaviour
 {
 	[SerializeField]

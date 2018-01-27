@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: 2043759990}
   - component: {fileID: 2043759991}
   m_Layer: 0
-  m_Name: GenericNote
+  m_Name: Human
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
