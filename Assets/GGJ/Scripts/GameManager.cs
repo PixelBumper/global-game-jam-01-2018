@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -37,18 +37,11 @@ public class GameManager : MonoBehaviour
             .Select(seconds => seconds + 1)
             .StartWith(0) // There's no way to specify the initialDelay so we'll fake it.
             .TakeUntil(Observable.Timer(timer))
-            .Select(counter => timer.Subtract(TimeSpan.FromSeconds(counter)));
+            .Select(counter => timer.Subtract(TimeSpan.FromSeconds(counter + 1)));
 
-        ScoreChanges
-            .TakeWhile(score => !score.isFinished())
-            .AsUnitObservable()
-            .Materialize()
-            .Merge(CountDown.AsUnitObservable().Materialize())
-            .Where(notfication => notfication.Kind == NotificationKind.OnCompleted)
-            .First()
-            .Subscribe(
-                _ => SceneManager.LoadScene("ScoreScene")
-            );
+        ScoreChanges.CombineLatest(CountDown, (score, time) => new KeyValuePair<HelpScore, TimeSpan>(score, time))
+            .Where(pair => pair.Key.isFinished() || pair.Value.TotalSeconds == 0)
+            .Subscribe(pair => SceneManager.LoadScene("ScoreScene"));
     }
 
     public void Rescued()

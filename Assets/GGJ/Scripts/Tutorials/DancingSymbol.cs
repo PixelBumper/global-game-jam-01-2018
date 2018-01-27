@@ -4,6 +4,7 @@ using GGJ.Scripts.ScriptableObjects;
 using UniRx;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 namespace GGJ.Scripts
 {
@@ -14,6 +15,8 @@ namespace GGJ.Scripts
 
         [SerializeField] private SpriteRenderer _singleNoteSprite;
         private AudioSource _audioSource;
+
+		private IDisposable _disposableObserver;
 
         public SingleNoteConfiguration SingleNoteConfig
         {
@@ -33,12 +36,33 @@ namespace GGJ.Scripts
             _singleNoteSprite.sprite = _singleNoteConfiguration.Sprite;
 
             _audioSource = GetComponent<AudioSource>();
+
+            _disposableObserver = InputController.Instance.FireChanges.Subscribe(OnFirePressed);
+        }
+
+        public void OnDestroy()
+        {
+            _disposableObserver.Dispose();
+        }
+
+        private void OnFirePressed(EFire firePressed)
+        {
+            if (firePressed.ToString().Equals(_singleNoteConfiguration.button))
+            {
+                _audioSource.PlayOneShot(_singleNoteConfiguration.Note);
+                AnimateBump();
+            }
         }
 
         public void PlayNoteAsHint()
         {
             _audioSource.PlayOneShot(_singleNoteConfiguration.Note);
 
+            AnimateBump();
+        }
+
+        private void AnimateBump()
+        {
             Sequence animationSequence = DOTween.Sequence();
             animationSequence.Append(_singleNoteSprite.transform.DOScale(Vector3.one * 2, 0.2f));
             animationSequence.Append(_singleNoteSprite.transform.DOScale(Vector3.one, 0.5f));
@@ -50,9 +74,12 @@ namespace GGJ.Scripts
             return _audioSource.isPlaying;
         }
 
-        public void PlayNoteByPlayer()
+        internal void Disappear()
         {
-
+            Sequence animationSequence = DOTween.Sequence();
+            animationSequence.Append(_singleNoteSprite.transform.DOScale(Vector3.zero, 0.3f));
+            animationSequence.Join(_singleNoteSprite.transform.DORotate(Vector3.up * 90, 0.3f));
+            animationSequence.Play();
         }
     }
 }
