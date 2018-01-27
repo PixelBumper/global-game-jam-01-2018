@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public IObservable<long> ScoreChanges;
 	public IObservable<TimeSpan> CountDown;
 	public IObservable<EWorldStatus> WorldChanges;
-	public IObservable<EFire> fireChanges;
+	public IObservable<EFire> FireChanges;
 
 	private void Awake()
 	{
@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 
 		ScoreChanges = Observable.Interval(TimeSpan.FromSeconds(1));
 
-		fireChanges = Observable.EveryUpdate()
+		FireChanges = Observable.EveryUpdate()
 			.SelectMany(
 				Enum.GetValues(typeof(EFire))
 					.Cast<EFire>()
