@@ -10,15 +10,16 @@ namespace GGJ.Scripts
 
         [SerializeField] private DancingSymbol[] _dancingSymbols;
 
-        private Coroutine _coroutine;
+        private Coroutine _hintCoroutine;
+        private Coroutine _waitCoroutine;
 
         private void Start(){
 
-            _coroutine = StartCoroutine(PlayHintsInSequence());
+            _hintCoroutine = StartCoroutine(PlayHintsInSequence());
             InputController.Instance.FireChanges.Subscribe(firePressed => {
-				if(_coroutine != null){
-                    StopCoroutine(_coroutine);
-                    _coroutine = null;
+				if(_hintCoroutine != null){
+                    StopCoroutine(_hintCoroutine);
+                    _hintCoroutine = null;
                 }
 			});
         }
