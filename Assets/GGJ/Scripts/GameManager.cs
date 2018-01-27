@@ -1,14 +1,15 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
-	// Use this for initialization
-	void Start ()
+public class GameManager : MonoBehaviour
+{
+    [SerializeField]
+    private int _gameDurationSeconds = 2 * 60;
+
+	private void Start ()
 	{
-		var timer = TimeSpan.FromMinutes(3);
+		var timer = TimeSpan.FromSeconds(_gameDurationSeconds);
 
 		Observable.Interval(TimeSpan.FromSeconds(1))
 			.TakeUntil(Observable.Timer(timer))
