@@ -3,12 +3,11 @@
 public enum EWorldStatus
 {
     Ghost,
-    Living,
+    Living
 }
 
 static class EWorldStatusMethods
 {
-
     public static EWorldStatus Advance(this EWorldStatus worldStatus)
     {
         switch (worldStatus)

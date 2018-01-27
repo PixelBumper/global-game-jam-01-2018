@@ -1,16 +1,16 @@
 ﻿using System;
+using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Text))]
 public class GameTimerToText : MonoBehaviour
 {
-    private Text _textComp;
+    private TextMeshProUGUI _textComp;
 
     private void Start()
     {
-        _textComp = GetComponent<Text>();
+        _textComp = GetComponent<TextMeshProUGUI>();
         var gameManager = FindObjectOfType<GameManager>();
         gameManager.CountDown.Subscribe(OnCountdown);
     }

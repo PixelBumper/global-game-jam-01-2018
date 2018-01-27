@@ -33,18 +33,6 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        var timer = TimeSpan.FromSeconds(_gameSettings.GameDurationSeconds);
-
-        CountDown = Observable.Interval(TimeSpan.FromSeconds(1))
-            .TakeUntil(Observable.Timer(timer))
-            .Select(counter => timer.Subtract(TimeSpan.FromSeconds(counter)));
-
-        CountDown.Subscribe(
-            timeLeft => Debug.Log("Still alive for ... " + timeLeft),
-            Debug.LogException,
-            () => SceneManager.LoadScene("ScoreScene")
-        );
-
         WorldChanges = Observable.EveryUpdate()
             .Where(_ => Input.GetKeyDown(KeyCode.Space))
             .Scan(EWorldStatus.Living, (status, l) => status.Advance());
@@ -59,4 +47,19 @@ public class GameManager : MonoBehaviour
                     .Where(fire => Math.Abs(Input.GetAxis(fire.ToString())) > 0.2f && Input.GetButton(fire.ToString()))
             );
     }
+
+	public void OnGameStarted(){
+		var timer = TimeSpan.FromSeconds(_gameSettings.GameDurationSeconds);
+
+        CountDown = Observable.Interval(TimeSpan.FromSeconds(1))
+			.TakeUntil(Observable.Timer(timer))
+			.Select(counter => timer.Subtract(TimeSpan.FromSeconds(counter)))
+			.StartWith(timer); // Immediately sent it off so everyone has a default value.
+
+		CountDown.Subscribe(
+			timeLeft => { /** No-op. */ },
+			Debug.LogException,
+			() => SceneManager.LoadScene("ScoreScene")
+		);
+	}
 }
