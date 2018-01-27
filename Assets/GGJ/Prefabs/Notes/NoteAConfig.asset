@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51f03e384766c44528a9bbe4c4d81563, type: 3}
+  m_Name: NoteAConfig
+  m_EditorClassIdentifier: 
+  Note: {fileID: 8300000, guid: b058f8a5f35334aec95325470f1c5806, type: 3}
+  Sprite: {fileID: 21300000, guid: 6796b75abab394e3099ba5a2601cc899, type: 3}
