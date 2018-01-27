@@ -25,6 +25,7 @@ public class GhostController : MonoBehaviour
 
     private float _deltaSinceLastFinishedSequence;
 
+    private GameObject _speakBubble;
     private GameObject _currentPlayingNote;
     private SpriteRenderer _spriteRendererOfCurrentNote;
 
@@ -48,17 +49,10 @@ public class GhostController : MonoBehaviour
 
         GetComponent<SphereCollider>().radius = _mumblingRange;
 
-        _currentPlayingNote = new GameObject(
-            "note symbols", 
-            typeof(SpriteRenderer), 
-            typeof(RendererLayerOrderingHandler));
+        _speakBubble = transform.Find("SpeakBubble").gameObject;
+        _currentPlayingNote = _speakBubble.transform.Find("CurrentNote").gameObject;
 
-        _currentPlayingNote.SetActive(false);
-        var transform = _currentPlayingNote.transform;
-        transform.SetParent(this.transform);
-
-        transform.eulerAngles = new Vector3(90, 0, 0);
-        transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + 1);
+        _speakBubble.SetActive(false);
         
         _spriteRendererOfCurrentNote = _currentPlayingNote.GetComponent<SpriteRenderer>();
         _spriteRendererOfCurrentNote.sprite = _noteConfiguration[_nextNoteToPlay].Sprite;
@@ -69,7 +63,7 @@ public class GhostController : MonoBehaviour
         
         if (_isMumbling && _audioSource.isPlaying == false)
         {
-            _currentPlayingNote.SetActive(false);
+            _speakBubble.SetActive(false);
             _audioSource.PlayOneShot(_mumblingSound);
         }
 
@@ -79,12 +73,12 @@ public class GhostController : MonoBehaviour
             if (_deltaSinceLastFinishedSequence < _delayBetweenSequenceRepetition)
             {
                 // hide note in case we are waiting for the delay to be over
-                _currentPlayingNote.SetActive(false);
+                _speakBubble.SetActive(false);
             }
             else
             {
                 // play the next note in the sequence
-                _currentPlayingNote.SetActive(true);
+                _speakBubble.SetActive(true);
                 _spriteRendererOfCurrentNote.sprite = _noteConfiguration[_nextNoteToPlay].Sprite;
                 _audioSource.PlayOneShot(_noteConfiguration[_nextNoteToPlay].Note);
                 _nextNoteToPlay++;
@@ -117,7 +111,7 @@ public class GhostController : MonoBehaviour
                 {
                     _nextNoteToPlay = 0;
                     _audioSource.Stop();
-                    _currentPlayingNote.SetActive(true);
+                    _speakBubble.SetActive(true);
                     _isMumbling = false;
                     _isPlayingSequence = true;
                 }
@@ -127,7 +121,7 @@ public class GhostController : MonoBehaviour
             {
                 _audioSource.Stop();
                 _isMumbling = true;
-                _currentPlayingNote.SetActive(false);
+                _speakBubble.SetActive(false);
                 _isPlayingSequence = false;
             }
         }
