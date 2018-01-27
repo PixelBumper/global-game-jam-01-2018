@@ -5,16 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    private int _gameDurationSeconds = 2 * 60;
+    [SerializeField] private GameSettings _gameSettings;
+    public GameSettings GameSettings { get { return _gameSettings; } }
 
-	public IObservable<long> ScoreChanges;
+    public IObservable<long> ScoreChanges;
 	public IObservable<TimeSpan> CountDown;
 	public IObservable<EWorldStatus> WorldChanges;
 
 	private void Awake()
 	{
-		var timer = TimeSpan.FromSeconds(_gameDurationSeconds);
+		var timer = TimeSpan.FromSeconds(_gameSettings.GameDurationSeconds);
 
 		CountDown = Observable.Interval(TimeSpan.FromSeconds(1))
 			.TakeUntil(Observable.Timer(timer))

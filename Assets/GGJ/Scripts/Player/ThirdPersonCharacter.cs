@@ -6,14 +6,16 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 	[RequireComponent(typeof(CapsuleCollider))]
 	public class ThirdPersonCharacter : MonoBehaviour
 	{
-		[SerializeField] private float m_MoveSpeedMultiplier = 1f;
-
+		private float m_MoveSpeedMultiplier = 1f;
 		private Rigidbody m_Rigidbody;
 		private float m_ForwardAmount;
 
 		private void Start()
 		{
-			m_Rigidbody = GetComponent<Rigidbody>();
+            var gameManager = FindObjectOfType<GameManager>();
+            m_MoveSpeedMultiplier = gameManager.GameSettings.PlayerSpeed;
+
+            m_Rigidbody = GetComponent<Rigidbody>();
 			m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 		}
 
