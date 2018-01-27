@@ -13,3 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameDurationSeconds: 120
   _playerSpeed: 10
+  _availableNotes:
+  - {fileID: 11400000, guid: ad665cc6f0a044295ae142bfa51e7613, type: 2}
+  - {fileID: 11400000, guid: 4779e2c09aaf04120a62598271ec11ec, type: 2}
+  - {fileID: 11400000, guid: f1d824911dafa43a29a72bec60ad39de, type: 2}
+  - {fileID: 11400000, guid: 0dc04ea7668824769bf09c341146e287, type: 2}
