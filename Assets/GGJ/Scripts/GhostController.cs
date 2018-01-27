@@ -12,13 +12,19 @@ public class GhostController : MonoBehaviour
 	[SerializeField]
 	private SingleNoteConfiguration[] _noteConfiguration;
 
+	[SerializeField]
+	[TooltipAttribute("the time that has to pass between two sequence ")]
+	private float _delayBetweenSequenceRepetition;
+
+	private float _deltaSinceLastFinishedSequence;
+
 	private GameObject _currentPlayingNote;
 	private SpriteRenderer _spriteRendererOfCurrentNote;
 
 	private AudioSource _audioSource;
 	private SphereCollider _sphereCollider;
 	
-	private int nextNoteToPlay = 0;
+	private int _nextNoteToPlay = 0;
 	private bool _isPlaying;
 
 	// Use this for initialization
@@ -40,7 +46,7 @@ public class GhostController : MonoBehaviour
 		
 		transform.position = new Vector2(this.transform.position.x, this.transform.position.y+1);
 		_spriteRendererOfCurrentNote = _currentPlayingNote.AddComponent<SpriteRenderer>();
-		_spriteRendererOfCurrentNote.sprite = _noteConfiguration[nextNoteToPlay].Sprite;
+		_spriteRendererOfCurrentNote.sprite = _noteConfiguration[_nextNoteToPlay].Sprite;
 	}
 	
 	// Update is called once per frame
@@ -50,14 +56,15 @@ public class GhostController : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		if (_isPlaying && _audioSource.isPlaying == false)
+		if (_isPlaying && _audioSource.isPlaying == false && _deltaSinceLastFinishedSequence > _delayBetweenSequenceRepetition)
 		{
-			_spriteRendererOfCurrentNote.sprite = _noteConfiguration[nextNoteToPlay].Sprite;
-			_audioSource.PlayOneShot(_noteConfiguration[nextNoteToPlay].Note);
-			nextNoteToPlay++;
-			if (nextNoteToPlay >= _noteConfiguration.Length)
+			_spriteRendererOfCurrentNote.sprite = _noteConfiguration[_nextNoteToPlay].Sprite;
+			_audioSource.PlayOneShot(_noteConfiguration[_nextNoteToPlay].Note);
+			_nextNoteToPlay++;
+			if (_nextNoteToPlay >= _noteConfiguration.Length)
 			{
-				nextNoteToPlay = 0;
+				_nextNoteToPlay = 0;
+				_deltaSinceLastFinishedSequence = 0;
 			}
 		}
 	}
@@ -68,7 +75,7 @@ public class GhostController : MonoBehaviour
 		{
 			_currentPlayingNote.SetActive(true);
 			_isPlaying = true;
-			nextNoteToPlay = 0;
+			_nextNoteToPlay = 0;
 		}
 	}
 
