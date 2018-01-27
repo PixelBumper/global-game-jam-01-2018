@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Name: NoteAConfig
   m_EditorClassIdentifier: 
   Note: {fileID: 8300000, guid: b058f8a5f35334aec95325470f1c5806, type: 3}
-  Sprite: {fileID: 21300000, guid: 6796b75abab394e3099ba5a2601cc899, type: 3}
+  Sprite: {fileID: 21300000, guid: 4843e6d1311f59245b8e6d54f3639b24, type: 3}

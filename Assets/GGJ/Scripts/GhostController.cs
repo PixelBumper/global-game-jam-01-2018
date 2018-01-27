@@ -32,7 +32,7 @@ public class GhostController : MonoBehaviour
 		var transform = _currentPlayingNote.transform;
 		transform.SetParent(this.transform);
 		
-		transform.position = new Vector2(0, -100);
+		transform.position = new Vector2(this.transform.position.x, this.transform.position.y+1);
 		_spriteRendererOfCurrentNote = _currentPlayingNote.AddComponent<SpriteRenderer>();
 		_spriteRendererOfCurrentNote.sprite = _noteConfiguration[nextNoteToPlay].Sprite;
 	}
@@ -47,7 +47,8 @@ public class GhostController : MonoBehaviour
 		if (_isPlaying && _audioSource.isPlaying == false)
 		{
 			_spriteRendererOfCurrentNote.sprite = _noteConfiguration[nextNoteToPlay].Sprite;
-			_audioSource.PlayOneShot(_noteConfiguration[nextNoteToPlay++].Note);
+			_audioSource.PlayOneShot(_noteConfiguration[nextNoteToPlay].Note);
+			nextNoteToPlay++;
 			if (nextNoteToPlay >= _noteConfiguration.Length)
 			{
 				nextNoteToPlay = 0;
