@@ -20,7 +20,8 @@ public class GameManager : MonoBehaviour
 
 		CountDown = Observable.Interval(TimeSpan.FromSeconds(1))
 			.TakeUntil(Observable.Timer(timer))
-			.Select(counter => timer.Subtract(TimeSpan.FromSeconds(counter)));
+			.Select(counter => timer.Subtract(TimeSpan.FromSeconds(counter)))
+			.StartWith(timer); // Immediately sent it off so everyone has a default value.
 
 		CountDown.Subscribe(
 			timeLeft => Debug.Log("Still alive for ... " + timeLeft),
