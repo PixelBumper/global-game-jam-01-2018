@@ -27,9 +27,12 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        var initialWorld = EWorldStatus.Living;
+
         WorldChanges = Observable.EveryUpdate()
             .Where(_ => Input.GetKeyDown(KeyCode.Space))
-            .Scan(EWorldStatus.Living, (status, l) => status.Advance());
+            .Scan(initialWorld, (status, l) => status.Advance())
+            .StartWith(initialWorld);
 
         var timer = TimeSpan.FromSeconds(_gameSettings.GameDurationSeconds);
 
