@@ -36,4 +36,12 @@ public class CameraController : MonoBehaviour
         var playerPosition = _player.transform.position;
         transform.position = playerPosition + _offset;
     }
+
+    private void OnDestroy()
+    {
+        if(_disposable != null)
+        {
+            _disposable.Dispose();
+        }
+    }
 }

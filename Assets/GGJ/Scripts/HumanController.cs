@@ -26,7 +26,7 @@ public class HumanController : MonoBehaviour
         GetComponent<SphereCollider>().radius = _mumblingRange;
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if ("Player".Equals(other.gameObject.tag))
         {
@@ -44,11 +44,15 @@ public class HumanController : MonoBehaviour
 
     private void OnMumbleFinished()
     {
+        Debug.Log("OnMumbleFinished");
         _canMumble = true;
     }
 
     private void OnDestroy()
     {
-        _dispisable.Dispose();
+        if(_dispisable != null)
+        {
+            _dispisable.Dispose();
+        }
     }
 }
