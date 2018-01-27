@@ -51,4 +51,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72e33149493cb48f5b51b505a3b2575c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameDurationSeconds: 120
+  _gameSettings: {fileID: 11400000, guid: 5f6af9e1f3527d945bd3130566fc620e, type: 2}
