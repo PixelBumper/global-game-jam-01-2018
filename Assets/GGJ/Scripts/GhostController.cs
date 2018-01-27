@@ -43,6 +43,7 @@ public class GhostController : MonoBehaviour
             // TODO init ghost with random note
         }
 
+        _deltaSinceLastFinishedSequence = _delayBetweenSequenceRepetition;
         _audioSource = GetComponent<AudioSource>();
 
         GetComponent<SphereCollider>().radius = _mumblingRange;
@@ -65,8 +66,10 @@ public class GhostController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
         if (_isMumbling && _audioSource.isPlaying == false)
         {
+            _currentPlayingNote.SetActive(false);
             _audioSource.PlayOneShot(_mumblingSound);
         }
 
@@ -112,15 +115,17 @@ public class GhostController : MonoBehaviour
             {
                 if (_isMumbling)
                 {
+                    _nextNoteToPlay = 0;
                     _audioSource.Stop();
+                    _currentPlayingNote.SetActive(true);
+                    _isMumbling = false;
+                    _isPlayingSequence = true;
                 }
 
-                _isMumbling = false;
-                _currentPlayingNote.SetActive(true);
-                _isPlayingSequence = true;
             }
-            else
+            else if (_isPlayingSequence)
             {
+                _audioSource.Stop();
                 _isMumbling = true;
                 _currentPlayingNote.SetActive(false);
                 _isPlayingSequence = false;
