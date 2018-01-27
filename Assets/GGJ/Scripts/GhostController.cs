@@ -23,6 +23,9 @@ public class GhostController : MonoBehaviour
     [SerializeField]
     private AudioClip _mumblingSound;
 
+    [SerializeField]
+    private Animator[] _animators;
+
     private float _deltaSinceLastFinishedSequence;
 
     private GameObject _speakBubble;
@@ -39,11 +42,9 @@ public class GhostController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if (_noteConfiguration == null || _noteConfiguration.Length == 0)
-        {
-            // TODO init ghost with random note
-        }
-
+        
+        Instantiate(_animators[Random.Range(0, _animators.Length)], transform);
+        
         _deltaSinceLastFinishedSequence = _delayBetweenSequenceRepetition;
         _audioSource = GetComponent<AudioSource>();
 

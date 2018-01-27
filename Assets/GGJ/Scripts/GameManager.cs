@@ -39,11 +39,16 @@ public class GameManager : MonoBehaviour
             .TakeUntil(Observable.Timer(timer))
             .Select(counter => timer.Subtract(TimeSpan.FromSeconds(counter)));
 
-        CountDown.Subscribe(
-            timeLeft => { /** No-op. */ },
-            Debug.LogException,
-            () => SceneManager.LoadScene("ScoreScene")
-        );
+        ScoreChanges
+            .TakeWhile(score => !score.isFinished())
+            .AsUnitObservable()
+            .Materialize()
+            .Merge(CountDown.AsUnitObservable().Materialize())
+            .Where(notfication => notfication.Kind == NotificationKind.OnCompleted)
+            .First()
+            .Subscribe(
+                _ => SceneManager.LoadScene("ScoreScene")
+            );
     }
 
     public void Rescued()
