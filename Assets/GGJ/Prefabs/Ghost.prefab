@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c4f42e3f0a3a441c999355fe4cf29ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _range: 3
   _noteConfiguration:
   - {fileID: 11400000, guid: ad665cc6f0a044295ae142bfa51e7613, type: 2}
   - {fileID: 11400000, guid: 4779e2c09aaf04120a62598271ec11ec, type: 2}

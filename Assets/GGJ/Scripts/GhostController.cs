@@ -7,16 +7,19 @@ using UnityEngine;
 public class GhostController : MonoBehaviour
 {
 	[SerializeField]
+	private float _range;
+	
+	[SerializeField]
 	private SingleNoteConfiguration[] _noteConfiguration;
 
 	private GameObject _currentPlayingNote;
 	private SpriteRenderer _spriteRendererOfCurrentNote;
 
 	private AudioSource _audioSource;
+	private SphereCollider _sphereCollider;
 	
 	private int nextNoteToPlay = 0;
 	private bool _isPlaying;
-	
 
 	// Use this for initialization
 	void Start ()
@@ -26,6 +29,8 @@ public class GhostController : MonoBehaviour
 			// TODO init ghost with random note
 		}
 		_audioSource = GetComponent<AudioSource>();
+
+		GetComponent<SphereCollider>().radius = _range;
 		
 		_currentPlayingNote = new GameObject();
 		
