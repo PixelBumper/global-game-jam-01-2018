@@ -9,11 +9,10 @@ public class GameManager : MonoBehaviour {
 	void Start ()
 	{
 		var timer = TimeSpan.FromMinutes(3);
-		var interval = TimeSpan.FromSeconds(1);
 
-		Observable.Interval(interval)
+		Observable.Interval(TimeSpan.FromSeconds(1))
 			.TakeUntil(Observable.Timer(timer))
-			.Select(_ => timer.Subtract(interval))
+			.Select(counter => timer.Subtract(TimeSpan.FromSeconds(counter)))
 			.Subscribe(
 				timeLeft => Debug.Log("Still alive for " + timeLeft),
 				Debug.LogException,
