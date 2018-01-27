@@ -37,7 +37,7 @@ namespace GGJ.Scripts
                     Enum.GetValues(typeof(EFire))
                         .Cast<EFire>()
                         .ToObservable()
-                        .Where(fire => Math.Abs(Input.GetAxis(fire.ToString())) > 0.2f && Input.GetButton(fire.ToString()))
+                        .Where(fire => Input.GetButtonDown(fire.ToString()))
                 );
         }
     }
