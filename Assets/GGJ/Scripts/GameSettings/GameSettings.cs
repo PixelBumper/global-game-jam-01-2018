@@ -24,18 +24,18 @@ public class GameSettings : ScriptableObject
     [Header("Ghost")]
     [TooltipAttribute("defines at which point the player will be able to hear the ghost")]
     [SerializeField] 
-    private float _rangeForHearingPresence = 3;
-    public float RangeForHearingPresence
+    private float _rangeForHearingGhostPresence = 3;
+    public float RangeForHearingGhostPresence
     {
-        get { return _rangeForHearingPresence; }
+        get { return _rangeForHearingGhostPresence; }
     }
 
     [TooltipAttribute("defines at which point the ghost will be able to hear the ghost")]
     [SerializeField]
-    private float _rangeForPlayingSequence = 1.5f;
-    public float RangeForPlayingSequence
+    private float _rangeForPlayingSequenceOfGhost = 1.5f;
+    public float RangeForPlayingSequenceOfGhost
     {
-        get { return _rangeForPlayingSequence; }
+        get { return _rangeForPlayingSequenceOfGhost; }
     }
 
     [Header("Human")]
