@@ -32,7 +32,7 @@ public class GhostController : MonoBehaviour
     private SphereCollider _sphereCollider;
 
     private int _nextNoteToPlay = 0;
-    private bool _isMumbling = true;
+    private bool _isMumbling = false;
     private bool _isPlayingSequence = false;
 
     // Use this for initialization
@@ -47,14 +47,19 @@ public class GhostController : MonoBehaviour
 
         GetComponent<SphereCollider>().radius = _mumblingRange;
 
-        _currentPlayingNote = new GameObject();
+        _currentPlayingNote = new GameObject(
+            "note symbols", 
+            typeof(SpriteRenderer), 
+            typeof(RendererLayerOrderingHandler));
 
         _currentPlayingNote.SetActive(false);
         var transform = _currentPlayingNote.transform;
         transform.SetParent(this.transform);
 
+        transform.eulerAngles = new Vector3(90, 0, 0);
         transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + 1);
-        _spriteRendererOfCurrentNote = _currentPlayingNote.AddComponent<SpriteRenderer>();
+        
+        _spriteRendererOfCurrentNote = _currentPlayingNote.GetComponent<SpriteRenderer>();
         _spriteRendererOfCurrentNote.sprite = _noteConfiguration[_nextNoteToPlay].Sprite;
     }
 
@@ -101,21 +106,25 @@ public class GhostController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (Vector3.Distance(other.transform.position, transform.position) < _rangeForPlayingSequence)
+        if ("Player".Equals(other.tag))
         {
-            if (_isMumbling)
+            if (Vector3.Distance(other.transform.position, transform.position) < _rangeForPlayingSequence)
             {
-                _audioSource.Stop();
+                if (_isMumbling)
+                {
+                    _audioSource.Stop();
+                }
+
+                _isMumbling = false;
+                _currentPlayingNote.SetActive(true);
+                _isPlayingSequence = true;
             }
-            _isMumbling = false;
-            _currentPlayingNote.SetActive(true);
-            _isPlayingSequence = true;
-        }
-        else
-        {
-            _isMumbling = true;
-            _currentPlayingNote.SetActive(false);
-            _isPlayingSequence = false;
+            else
+            {
+                _isMumbling = true;
+                _currentPlayingNote.SetActive(false);
+                _isPlayingSequence = false;
+            }
         }
     }
 
