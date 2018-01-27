@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
 		WorldChanges = Observable.EveryUpdate()
 			.Where(_ => Input.GetKeyDown(KeyCode.Space))
-			.Scan(EWorldStatus.Living, (status, l) => status);
+			.Scan(EWorldStatus.Living, (status, l) => status.Advance());
 
 		ScoreChanges = Observable.Interval(TimeSpan.FromSeconds(1));
 
