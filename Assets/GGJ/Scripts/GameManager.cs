@@ -23,9 +23,10 @@ public class GameManager : MonoBehaviour
         var timer = TimeSpan.FromSeconds(_gameSettings.GameDurationSeconds);
 
         CountDown = Observable.Interval(TimeSpan.FromSeconds(1))
+            .Select(seconds => seconds + 1)
+            .StartWith(0) // There's no way to specify the initialDelay so we'll fake it.
             .TakeUntil(Observable.Timer(timer))
-            .Select(counter => timer.Subtract(TimeSpan.FromSeconds(counter)))
-            .StartWith(timer); // Immediately sent it off so everyone has a default value.
+            .Select(counter => timer.Subtract(TimeSpan.FromSeconds(counter)));
 
         CountDown.Subscribe(
             timeLeft => { /** No-op. */ },
