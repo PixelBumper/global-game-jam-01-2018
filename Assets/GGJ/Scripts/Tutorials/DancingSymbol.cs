@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using GGJ.Scripts.ScriptableObjects;
 using UniRx;
 using UnityEngine;
-using DG.Tweening;
+// using DG.Tweening;
 using System;
 
 namespace GGJ.Scripts
@@ -28,7 +28,7 @@ namespace GGJ.Scripts
 
         public void Awake()
         {
-            DOTween.Init(false, true, LogBehaviour.ErrorsOnly);
+            //DOTween.Init(false, true, LogBehaviour.ErrorsOnly);
         }
 
         public void Start()
@@ -63,10 +63,10 @@ namespace GGJ.Scripts
 
         private void AnimateBump()
         {
-            Sequence animationSequence = DOTween.Sequence();
+          /*  Sequence animationSequence = DOTween.Sequence();
             animationSequence.Append(_singleNoteSprite.transform.DOScale(Vector3.one * 2, 0.2f));
             animationSequence.Append(_singleNoteSprite.transform.DOScale(Vector3.one, 0.5f));
-            animationSequence.Play();
+            animationSequence.Play();*/
         }
 
         public bool IsPlayingNote()
@@ -76,10 +76,10 @@ namespace GGJ.Scripts
 
         internal void Disappear()
         {
-            Sequence animationSequence = DOTween.Sequence();
+          /*  Sequence animationSequence = DOTween.Sequence();
             animationSequence.Append(_singleNoteSprite.transform.DOScale(Vector3.zero, 0.3f));
             animationSequence.Join(_singleNoteSprite.transform.DORotate(Vector3.up * 90, 0.3f));
-            animationSequence.Play();
+            animationSequence.Play();*/
         }
     }
 }
