@@ -19,6 +19,12 @@ public class GameSettings : ScriptableObject
     private SingleNoteConfiguration[] _availableNotes;
     public SingleNoteConfiguration[] AvailableNotes { get { return _availableNotes; } }
 
+    [Header("Helps")]
+    [TooltipAttribute("the number of maximum helps that will be available for this game")]
+    [SerializeField]
+    private int _maximumHelps;
+    public int MaximumHelps { get { return _maximumHelps; } }
+
     [Header("Ghost")]
     [TooltipAttribute("defines at which point the player will be able to hear the ghost")]
     [SerializeField]
