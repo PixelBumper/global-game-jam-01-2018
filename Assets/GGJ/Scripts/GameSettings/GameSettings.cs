@@ -39,13 +39,15 @@ public class GameSettings : ScriptableObject
     }
 
     [Header("Human")]
+    [TooltipAttribute("defines at which point the player will be able to hear the human")]
     [SerializeField]
     private float _rangeForHearingHuman = 3;
     public float RangeForHearingHuman
     {
         get { return _rangeForHearingHuman; }
     }
-    
+
+    [TooltipAttribute("defines at which point the player will be able to input the sequence")]
     [SerializeField]
     private float _rangeForPlayerInput = 1.5f;
     public float RangeForPlayerInput
