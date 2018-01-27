@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using GGJ.Scripts.ScriptableObjects;
 using UnityEngine;
@@ -12,8 +13,7 @@ public class GhostController : MonoBehaviour
     [SerializeField]
     private float _rangeForPlayingSequence;
 
-    [SerializeField]
-    private SingleNoteConfiguration[] _noteConfiguration;
+    private List<SingleNoteConfiguration> _noteConfiguration;
 
     [SerializeField]
     [TooltipAttribute("the time that has to pass between two sequence ")]
@@ -39,10 +39,9 @@ public class GhostController : MonoBehaviour
     private bool _isPlayingSequence = false;
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
-        
-        Instantiate(_animators[Random.Range(0, _animators.Length)], transform);
+        Instantiate(_animators[UnityEngine.Random.Range(0, _animators.Length)], transform);
         
         _deltaSinceLastFinishedSequence = _delayBetweenSequenceRepetition;
         _audioSource = GetComponent<AudioSource>();
@@ -58,9 +57,13 @@ public class GhostController : MonoBehaviour
         _spriteRendererOfCurrentNote.sprite = _noteConfiguration[_nextNoteToPlay].Sprite;
     }
 
+    public void SetNoteConfiguration(List<SingleNoteConfiguration> newConfig)
+    {
+        _noteConfiguration = newConfig;
+    }
+
     private void FixedUpdate()
     {
-        
         if (_isMumbling && _audioSource.isPlaying == false)
         {
             _speakBubble.SetActive(false);
@@ -84,13 +87,18 @@ public class GhostController : MonoBehaviour
                 _nextNoteToPlay++;
 
                 // if this was the last note start waiting
-                if (_nextNoteToPlay >= _noteConfiguration.Length)
+                if (_nextNoteToPlay >= _noteConfiguration.Count)
                 {
                     _nextNoteToPlay = 0;
                     _deltaSinceLastFinishedSequence = 0;
                 }
             }
         }
+    }
+
+    public void SetMumbling(AudioClip mumble)
+    {
+        _mumblingSound = mumble;
     }
 
     void OnTriggerEnter(Collider other)

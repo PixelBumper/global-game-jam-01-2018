@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff994e61e32cdd845975bec3f0335a30, type: 3}
+  m_Name: MumbleCharacterMap
+  m_EditorClassIdentifier: 
+  _map:
+  - Mumble: {fileID: 8300000, guid: 69c5ee23e785740f9b38ef73da47a9a7, type: 3}
+    Human: {fileID: 1659990856443678, guid: dc47d7417089692448eeccbba08eadc3, type: 2}

@@ -83,7 +83,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292541266834610}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4943343779874340}
@@ -224,15 +224,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mumblingRange: 3
   _rangeForPlayingSequence: 1.5
-  _noteConfiguration:
-  - {fileID: 11400000, guid: ad665cc6f0a044295ae142bfa51e7613, type: 2}
-  - {fileID: 11400000, guid: 4779e2c09aaf04120a62598271ec11ec, type: 2}
-  - {fileID: 11400000, guid: f1d824911dafa43a29a72bec60ad39de, type: 2}
-  - {fileID: 11400000, guid: 0dc04ea7668824769bf09c341146e287, type: 2}
   _delayBetweenSequenceRepetition: 1
   _mumblingSound: {fileID: 8300000, guid: b69a4f5cc832043308b936a03f4668ad, type: 3}
   _animators:
   - {fileID: 95275514689023254, guid: 45e379fddc46f46829d7b734ed525213, type: 2}
+  - {fileID: 95275514689023254, guid: 2147c39d2169d75429f7067a5f0d5ffc, type: 2}
+  - {fileID: 95275514689023254, guid: 6a809f8f6828baf46b1bdd678d3af7a9, type: 2}
+  - {fileID: 95275514689023254, guid: 8171dfcb613ece2419d95492b68295f4, type: 2}
 --- !u!135 &135675571152646154
 SphereCollider:
   m_ObjectHideFlags: 1

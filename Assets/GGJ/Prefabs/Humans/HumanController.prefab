@@ -163,14 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mumblingRange: 3
-  _noteConfiguration:
-  - {fileID: 11400000, guid: ad665cc6f0a044295ae142bfa51e7613, type: 2}
-  - {fileID: 11400000, guid: 4779e2c09aaf04120a62598271ec11ec, type: 2}
-  - {fileID: 11400000, guid: f1d824911dafa43a29a72bec60ad39de, type: 2}
-  - {fileID: 11400000, guid: 0dc04ea7668824769bf09c341146e287, type: 2}
-  _graphics:
-  - {fileID: 95414883667707386, guid: 9d9e5785de7f7f64e90ca06ab186ae00, type: 2}
-  _mumblingSound: {fileID: 8300000, guid: b69a4f5cc832043308b936a03f4668ad, type: 3}
+  _charactersMap: {fileID: 11400000, guid: baf5accf3ad763941b6721b2dd957c06, type: 2}
 --- !u!135 &135861034885763574
 SphereCollider:
   m_ObjectHideFlags: 1

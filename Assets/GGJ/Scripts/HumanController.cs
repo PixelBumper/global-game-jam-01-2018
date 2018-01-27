@@ -1,5 +1,6 @@
 ﻿using GGJ.Scripts.ScriptableObjects;
 using System;
+using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 
@@ -7,10 +8,12 @@ using UnityEngine;
 public class HumanController : MonoBehaviour
 {
     [SerializeField] private float _mumblingRange;
-    [SerializeField] private SingleNoteConfiguration[] _noteConfiguration;
-    [SerializeField] private Animator[] _graphics;
-    [SerializeField] private AudioClip _mumblingSound;
+    [SerializeField] private MumbleCharacterMap _charactersMap;
 
+    private GameObject _graphics;
+    private AudioClip _mumblingSound;
+    public event Action<AudioClip> OnSuccess;
+    private List<SingleNoteConfiguration> _noteConfiguration;
     private GameObject _currentPlayingNote;
     private AudioSource _audioSource;
     private SphereCollider _sphereCollider;
@@ -21,9 +24,12 @@ public class HumanController : MonoBehaviour
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-        var graphics = _graphics[UnityEngine.Random.Range(0, _graphics.Length)];
-        Instantiate(graphics, transform);
         GetComponent<SphereCollider>().radius = _mumblingRange;
+    }
+
+    public void SetNoteConfiguration(List<SingleNoteConfiguration> newConfig)
+    {
+        _noteConfiguration = newConfig;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -53,6 +59,20 @@ public class HumanController : MonoBehaviour
         if(_dispisable != null)
         {
             _dispisable.Dispose();
+        }
+    }
+
+    public void SetMumbling(AudioClip mumble)
+    {
+        _mumblingSound = mumble;
+        GameObject prefab;
+        if(_charactersMap.MumbleToHumans.TryGetValue(mumble, out prefab))
+        {
+            Instantiate(prefab, transform);
+        }
+        else
+        {
+            Debug.LogError("No human matching that mumble");
         }
     }
 }
