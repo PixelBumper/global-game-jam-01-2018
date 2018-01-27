@@ -56,17 +56,33 @@ public class GhostController : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		if (_isPlaying && _audioSource.isPlaying == false && _deltaSinceLastFinishedSequence > _delayBetweenSequenceRepetition)
+		
+		if (_isPlaying && _audioSource.isPlaying == false)
 		{
-			_spriteRendererOfCurrentNote.sprite = _noteConfiguration[_nextNoteToPlay].Sprite;
-			_audioSource.PlayOneShot(_noteConfiguration[_nextNoteToPlay].Note);
-			_nextNoteToPlay++;
-			if (_nextNoteToPlay >= _noteConfiguration.Length)
+			_deltaSinceLastFinishedSequence += Time.deltaTime;
+			if (_deltaSinceLastFinishedSequence < _delayBetweenSequenceRepetition)
 			{
-				_nextNoteToPlay = 0;
-				_deltaSinceLastFinishedSequence = 0;
+				// hide note in case we are waiting for the delay to be over
+				_currentPlayingNote.SetActive(false);	
+			}
+			else
+			{
+				// play the next note in the sequence
+				_currentPlayingNote.SetActive(true);
+				_spriteRendererOfCurrentNote.sprite = _noteConfiguration[_nextNoteToPlay].Sprite;
+				_audioSource.PlayOneShot(_noteConfiguration[_nextNoteToPlay].Note);
+				_nextNoteToPlay++;
+				
+				// if this was the last note start waiting
+				if (_nextNoteToPlay >= _noteConfiguration.Length)
+				{
+					_nextNoteToPlay = 0;
+					_deltaSinceLastFinishedSequence = 0;
+				}
 			}
 		}
+
+		
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -85,6 +101,7 @@ public class GhostController : MonoBehaviour
 		{
 			_currentPlayingNote.SetActive(false);
 			_isPlaying = false;
+			_deltaSinceLastFinishedSequence = 0;
 		}
 	}
 }
