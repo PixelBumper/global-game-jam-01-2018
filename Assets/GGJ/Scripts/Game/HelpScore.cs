@@ -14,6 +14,11 @@ public class HelpScore
 		this.max = max;
 	}
 
+	public bool isFinished()
+	{
+		return current == max;
+	}
+
 	public override string ToString()
 	{
 		return current + " / " + max;
