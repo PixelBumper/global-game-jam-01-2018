@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 			.StartWith(timer); // Immediately sent it off so everyone has a default value.
 
 		CountDown.Subscribe(
-			timeLeft => Debug.Log("Still alive for ... " + timeLeft),
+			timeLeft => { /** No-op. */ },
 			Debug.LogException,
 			() => SceneManager.LoadScene("ScoreScene")
 		);
