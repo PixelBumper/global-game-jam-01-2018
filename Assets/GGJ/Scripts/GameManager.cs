@@ -8,7 +8,20 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameSettings _gameSettings;
     public GameSettings GameSettings { get { return _gameSettings; } }
-    public IObservable<long> ScoreChanges;
+
+    public Subject<Unit> _ScoreChangesSubject = new Subject<Unit>();
+
+    public IObservable<HelpScore> ScoreChanges
+    {
+        get
+        {
+            return _ScoreChangesSubject
+                .StartWith(Unit.Default)
+                .Scan(0, (i, unit) => i + i)
+                .Select(current => new HelpScore(current, GameSettings.MaximumHelps));
+        }
+    }
+
     public IObservable<TimeSpan> CountDown;
     public IObservable<EWorldStatus> WorldChanges;
 
@@ -17,8 +30,6 @@ public class GameManager : MonoBehaviour
         WorldChanges = Observable.EveryUpdate()
             .Where(_ => Input.GetKeyDown(KeyCode.Space))
             .Scan(EWorldStatus.Living, (status, l) => status.Advance());
-
-        ScoreChanges = Observable.Interval(TimeSpan.FromSeconds(1));
 
         var timer = TimeSpan.FromSeconds(_gameSettings.GameDurationSeconds);
 
@@ -33,5 +44,10 @@ public class GameManager : MonoBehaviour
             Debug.LogException,
             () => SceneManager.LoadScene("ScoreScene")
         );
+    }
+
+    public void rescued()
+    {
+        _ScoreChangesSubject.OnNext(Unit.Default);
     }
 }
