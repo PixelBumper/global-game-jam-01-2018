@@ -42,11 +42,6 @@ public class GhostController : MonoBehaviour
 		_spriteRendererOfCurrentNote = _currentPlayingNote.AddComponent<SpriteRenderer>();
 		_spriteRendererOfCurrentNote.sprite = _noteConfiguration[nextNoteToPlay].Sprite;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	private void FixedUpdate()
 	{
