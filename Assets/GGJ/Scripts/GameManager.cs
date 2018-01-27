@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour {
 			.Subscribe(
 				timeLeft => Debug.Log("Still alive for " + timeLeft),
 				Debug.LogException,
-				_ => Debug.Log("We're dead :(")
+				() => Debug.Log("We're dead :(")
 			);
 	}
 }
