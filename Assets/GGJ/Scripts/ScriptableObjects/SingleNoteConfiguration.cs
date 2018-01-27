@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace GGJ.Scripts.ScriptableObjects
 {
@@ -8,5 +9,7 @@ namespace GGJ.Scripts.ScriptableObjects
         public AudioClip Note;
 
         public Sprite Sprite;
+
+        public String button;
     }
 }

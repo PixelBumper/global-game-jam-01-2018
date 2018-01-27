@@ -13,3 +13,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Note: {fileID: 8300000, guid: fffcbb0c208d44cb08f14298cf177379, type: 3}
   Sprite: {fileID: 21300000, guid: 557e910d23b449e459a4b0546cd03945, type: 3}
+  button: Fire4
