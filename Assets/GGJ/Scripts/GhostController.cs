@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using GGJ.Scripts.ScriptableObjects;
-using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider), typeof(AudioSource))]
