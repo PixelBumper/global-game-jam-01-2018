@@ -11,4 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06790ff504680bf4bb9f66f050bbf676, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  _gameDurationSeconds: 0
+  _gameDurationSeconds: 120
+  _playerSpeed: 10

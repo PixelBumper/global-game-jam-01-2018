@@ -53,3 +53,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scenesNamesToAdd:
   - VFX
+  - GameUI

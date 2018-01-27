@@ -17,3 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/GGJ/Scenes/VFX.unity
     guid: 2d6aeadc1df3d0b4fb9422074ee111b6
+  - enabled: 1
+    path: Assets/GGJ/Scenes/GameUI.unity
+    guid: 10fd2fc60a0c65347a0264d242359848
