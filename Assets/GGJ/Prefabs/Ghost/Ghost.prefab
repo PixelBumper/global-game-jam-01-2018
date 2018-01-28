@@ -129,7 +129,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -139,13 +139,49 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 10
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
   rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0.13932571
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.99438477
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1.0083313
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
@@ -162,31 +198,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
     m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -222,15 +234,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c4f42e3f0a3a441c999355fe4cf29ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mumblingRange: 3
-  _rangeForPlayingSequence: 1.5
   _delayBetweenSequenceRepetition: 1
   _mumblingSound: {fileID: 8300000, guid: b69a4f5cc832043308b936a03f4668ad, type: 3}
-  _animators:
-  - {fileID: 95275514689023254, guid: 45e379fddc46f46829d7b734ed525213, type: 2}
-  - {fileID: 95275514689023254, guid: 2147c39d2169d75429f7067a5f0d5ffc, type: 2}
-  - {fileID: 95275514689023254, guid: 6a809f8f6828baf46b1bdd678d3af7a9, type: 2}
-  - {fileID: 95275514689023254, guid: 8171dfcb613ece2419d95492b68295f4, type: 2}
 --- !u!135 &135675571152646154
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -241,7 +246,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &212412848957318072
 SpriteRenderer:

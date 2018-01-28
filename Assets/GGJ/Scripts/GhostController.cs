@@ -16,9 +16,6 @@ public class GhostController : MonoBehaviour
     [SerializeField]
     private AudioClip _mumblingSound;
 
-    [SerializeField]
-    private Animator[] _animators;
-
     private float _deltaSinceLastFinishedSequence;
 
     private GameObject _speakBubble;
@@ -31,11 +28,16 @@ public class GhostController : MonoBehaviour
     private int _nextNoteToPlay = 0;
     private bool _isMumbling = true;
     private bool _isPlayingSequence = false;
+    private AudioClip _myGhostMumblingClip;
 
     // Use this for initialization
     private void Start()
     {
-        Instantiate(_animators[UnityEngine.Random.Range(0, _animators.Length)], transform);
+        var ghostSoundProvider = GhostSoundProvider.FindOnScene();
+        var myGhostIndex = ghostSoundProvider.GetAvailableIndex();
+
+        _myGhostMumblingClip = ghostSoundProvider.AudioClips[myGhostIndex];
+        Instantiate(ghostSoundProvider.Animators[myGhostIndex], transform);
 
         _deltaSinceLastFinishedSequence = _delayBetweenSequenceRepetition;
         _audioSource = GetComponent<AudioSource>();
@@ -59,7 +61,7 @@ public class GhostController : MonoBehaviour
         if (_isMumbling && _audioSource.isPlaying == false)
         {
             _speakBubble.SetActive(false);
-            _audioSource.PlayOneShot(_mumblingSound);
+            _audioSource.PlayOneShot(_myGhostMumblingClip);
         }
 
         if (_isPlayingSequence && _audioSource.isPlaying == false)
