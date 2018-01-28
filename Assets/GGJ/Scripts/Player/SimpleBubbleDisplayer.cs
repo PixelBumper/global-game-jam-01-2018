@@ -62,7 +62,6 @@ public class SimpleBubbleDisplayer : MonoBehaviour
             StopCoroutine(_removeBubbleCoroutine);
         }
         _removeBubbleCoroutine = StartCoroutine(RemoveBubbleDelayed());
-
     }
 
     private IEnumerator RemoveBubbleDelayed()
@@ -74,5 +73,6 @@ public class SimpleBubbleDisplayer : MonoBehaviour
     private void OnDestroy()
     {
         _audioSource.Stop();
+        InputController.Instance.FireChanges.Unsbscribe(OnPlayerFireAction);
     }
 }

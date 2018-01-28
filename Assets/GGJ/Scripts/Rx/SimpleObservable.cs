@@ -50,7 +50,12 @@ class SimpleObservable<T> : IObservable<T>
 		}
 	}
 
-	class Sergio<T>
+    public void UnsubscribeAllTheThings()
+    {
+        _actions.Clear();
+    }
+
+    class Sergio<T>
 	{
 		public T t;
 

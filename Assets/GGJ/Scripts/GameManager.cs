@@ -130,4 +130,12 @@ public class GameManager : MonoBehaviour
         _helpScore = new HelpScore(_helpScore.current + 1, _helpScore.max);
         _scoreChanges.OnNext(_helpScore);
     }
+
+    private void OnDestroy()
+    {
+        InputController.Instance.FireChanges.UnsubscribeAllTheThings();
+        _scoreChanges.UnsubscribeAllTheThings();
+        _worldChanges.UnsubscribeAllTheThings();
+        _countDownChanges.UnsubscribeAllTheThings();
+    }
 }
