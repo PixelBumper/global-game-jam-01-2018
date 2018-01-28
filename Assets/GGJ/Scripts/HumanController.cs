@@ -96,8 +96,9 @@ public class HumanController : MonoBehaviour
             return;
         }
 
+        _symbolsEntered++;
         var indexOfSymbol = -1;
-        for (int i = 0; i < _noteConfiguration.Count; i++)
+        for (int i = _nextCorrectIndex; i < _noteConfiguration.Count; i++)
         {
             var currentDancingSymbol = _noteConfiguration[i];
             if (firePressed.ToString().Equals(currentDancingSymbol.button))
@@ -106,7 +107,6 @@ public class HumanController : MonoBehaviour
                 break;
             }
         }
-        _symbolsEntered++;
 
         if (indexOfSymbol == _nextCorrectIndex)
         {
@@ -117,12 +117,13 @@ public class HumanController : MonoBehaviour
             _nextCorrectIndex = 0;
         }
 
-        if (_symbolsEntered >= _noteConfiguration.Count)
+        if (_symbolsEntered == _noteConfiguration.Count)
         {
-            if (indexOfSymbol >= _nextCorrectIndex)
+            if ((indexOfSymbol >= _nextCorrectIndex-1) && (_nextCorrectIndex == _noteConfiguration.Count))
             {
                 _isFinished = true;
                 AnimateGoodbye();
+                return;
             }
             else
             {
@@ -131,6 +132,7 @@ public class HumanController : MonoBehaviour
                 Invoke("PlayFailure", 0.15f);
                 _symbolsEntered = 0;
                 _nextCorrectIndex = 0;
+                return;
             }
         }
     }
