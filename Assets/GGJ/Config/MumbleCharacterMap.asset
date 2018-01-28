@@ -18,3 +18,5 @@ MonoBehaviour:
     Human: {fileID: 1659990856443678, guid: 9d9e5785de7f7f64e90ca06ab186ae00, type: 2}
   - Mumble: {fileID: 8300000, guid: 89b64267f706a4f80b784f23ec03cdcf, type: 3}
     Human: {fileID: 1659990856443678, guid: dc3d13dcd2606ac469a68a5fdd55bd47, type: 2}
+  - Mumble: {fileID: 8300000, guid: d9ea0dae3be984a58a0f43c9f8835e55, type: 3}
+    Human: {fileID: 1659990856443678, guid: 45f0f5aaa3004c845a521f79f60815f1, type: 2}
