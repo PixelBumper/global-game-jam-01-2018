@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioClip[] _allMumbles;
     [SerializeField] private HumanController _humanControllerPrefab;
     [SerializeField] private GhostController _ghostControllerPrefab;
+    [SerializeField] private TupleSpawnPoint[] _spawnPoints;
 
     public GameSettings GameSettings { get { return _gameSettings; } }
 
@@ -57,14 +58,23 @@ public class GameManager : MonoBehaviour
             .Subscribe(pair => SceneManager.LoadScene("ScoreScene"));
 
         _allMumblesHashed = new HashSet<AudioClip>(_allMumbles);
+        int index = 0;
         foreach (var mumble in _allMumblesHashed)
         {
+            if(index >= _spawnPoints.Length)
+            {
+                Debug.LogError("You need as many spawn points as mumble sounds");
+            }
+
+            var positions = _spawnPoints[index++];
             var notesConfiguration = GetRandomNotesConfiguration();
             var humanInstance = Instantiate(_humanControllerPrefab);
+            humanInstance.transform.position = positions.HumanPosition.position;
             humanInstance.OnSuccess += OnHumanSuccess;
             humanInstance.SetNoteConfiguration(notesConfiguration);
             humanInstance.SetMumbling(mumble);
             var ghostInstance = Instantiate(_ghostControllerPrefab);
+            ghostInstance.transform.position = positions.GhostPosition.position;
             ghostInstance.SetMumbling(mumble);
             ghostInstance.SetNoteConfiguration(notesConfiguration);
 

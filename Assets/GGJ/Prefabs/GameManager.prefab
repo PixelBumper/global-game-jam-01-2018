@@ -65,3 +65,10 @@ MonoBehaviour:
     type: 2}
   _ghostControllerPrefab: {fileID: 114840200885089860, guid: 0fc8176a0173f4a8480848e4cd1edb1f,
     type: 2}
+  _spawnPoints:
+  - HumanPosition: {fileID: 0}
+    GhostPosition: {fileID: 0}
+  - HumanPosition: {fileID: 0}
+    GhostPosition: {fileID: 0}
+  - HumanPosition: {fileID: 0}
+    GhostPosition: {fileID: 0}
