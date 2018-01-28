@@ -17,6 +17,9 @@ https://www.igjam.eu/jams/global-game-jam-2018/576/
  - 1, 2, 3, 4 or (q, w, e, r) for entering sound cues
  - space for switching between realms
 
+# Background
+We created this game with a strong focus on accessibility, we hope it is possible to play for blind or visually impaired people. Please use headsets when possible!
+
 ![game1](Documentation/Characters.png "Hand drawn characters")
 
 ## Team
@@ -27,8 +30,6 @@ https://www.igjam.eu/jams/global-game-jam-2018/576/
  - Marta Viader    
  - Niklas Baudy
  - Luis Rojas Jimenez
-
-
 
 # Requirements
 Unity 2017.3.0f3
