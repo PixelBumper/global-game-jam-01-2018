@@ -1,7 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using UniRx;
 using UnityEngine;
 using DG.Tweening;
 using System;
@@ -19,7 +17,9 @@ namespace GGJ.Scripts
             }
         }
 
-        public IObservable<EFire> FireChanges;
+
+        public IObservable<EFire> FireChanges { get { return _fireChanges; } }
+        private SimpleObservable<EFire> _fireChanges = new SimpleObservable<EFire>();
 
         private void Awake()
         {
@@ -31,14 +31,29 @@ namespace GGJ.Scripts
             _instance = this;
             
             DontDestroyOnLoad(gameObject);
+        }
 
-            FireChanges = Observable.EveryUpdate()
-                .SelectMany(
-                    Enum.GetValues(typeof(EFire))
-                        .Cast<EFire>()
-                        .ToObservable()
-                        .Where(fire => Input.GetButtonDown(fire.ToString()))
-                );
+        private void Update()
+        {
+            if (Input.GetButtonDown(EFire.Fire1.ToString()))
+            {
+                _fireChanges.OnNext(EFire.Fire1);
+            }
+
+            if (Input.GetButtonDown(EFire.Fire2.ToString()))
+            {
+                _fireChanges.OnNext(EFire.Fire2);
+            }
+
+            if (Input.GetButtonDown(EFire.Fire3.ToString()))
+            {
+                _fireChanges.OnNext(EFire.Fire3);
+            }
+
+            if (Input.GetButtonDown(EFire.Fire4.ToString()))
+            {
+                _fireChanges.OnNext(EFire.Fire4);
+            }
         }
 
     }

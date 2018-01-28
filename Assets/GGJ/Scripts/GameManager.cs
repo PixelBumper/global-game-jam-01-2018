@@ -1,7 +1,6 @@
 ﻿using GGJ.Scripts.ScriptableObjects;
 using System;
 using System.Collections.Generic;
-using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,52 +15,38 @@ public class GameManager : MonoBehaviour
 
     public GameSettings GameSettings { get { return _gameSettings; } }
 
-    public Subject<Unit> _ScoreChangesSubject = new Subject<Unit>();
+    public IObservable<HelpScore> ScoreChanges { get { return _scoreChanges; } }
+    private readonly SimpleObservable<HelpScore> _scoreChanges = new SimpleObservable<HelpScore>();
+    private HelpScore _helpScore;
 
-    public IObservable<HelpScore> ScoreChanges
-    {
-        get
-        {
-            return _ScoreChangesSubject
-                .StartWith(Unit.Default)
-                .Scan(0, (i, unit) => i + i)
-                .Select(current => new HelpScore(current, GameSettings.MaximumHelps));
-        }
-    }
+    public IObservable<TimeSpan> CountDownChanges { get { return _countDownChanges; } }
+    private readonly SimpleObservable<TimeSpan> _countDownChanges = new SimpleObservable<TimeSpan>();
+    private TimeSpan _countDown;
 
-    public IObservable<TimeSpan> CountDown;
-    public IObservable<EWorldStatus> WorldChanges;
+    public IObservable<EWorldStatus> WorldChanges { get { return _worldChanges; } }
+    private readonly SimpleObservable<EWorldStatus> _worldChanges = new SimpleObservable<EWorldStatus>();
+    private EWorldStatus _currentWorldStatus = EWorldStatus.Living;
+
     private HashSet<AudioClip> _allMumblesHashed;
-    private Dictionary<AudioClip, Tuple<HumanController, GhostController>> _mumblingOwners;
+    private Dictionary<AudioClip, KeyValuePair<HumanController, GhostController>> _mumblingOwners;
 
     private void Awake()
     {
-        _mumblingOwners = new Dictionary<AudioClip, Tuple<HumanController, GhostController>>();
+        _helpScore = new HelpScore(0, _gameSettings.MaximumHelps);
+        _scoreChanges.OnNext(_helpScore);
 
-        var initialWorld = EWorldStatus.Living;
+        _countDown = TimeSpan.FromSeconds(_gameSettings.GameDurationSeconds);
+        _countDownChanges.OnNext(_countDown);
 
-        WorldChanges = Observable.EveryUpdate()
-            .Where(_ => Input.GetKeyDown(KeyCode.Space))
-            .Scan(initialWorld, (status, l) => status.Advance())
-            .StartWith(initialWorld);
+        _worldChanges.OnNext(_currentWorldStatus);
 
-        var timer = TimeSpan.FromSeconds(_gameSettings.GameDurationSeconds);
-
-        CountDown = Observable.Interval(TimeSpan.FromSeconds(1))
-            .Select(seconds => seconds + 1)
-            .StartWith(0) // There's no way to specify the initialDelay so we'll fake it.
-            .TakeUntil(Observable.Timer(timer))
-            .Select(counter => timer.Subtract(TimeSpan.FromSeconds(counter + 1)));
-
-        ScoreChanges.CombineLatest(CountDown, (score, time) => new KeyValuePair<HelpScore, TimeSpan>(score, time))
-            .Where(pair => pair.Key.isFinished() || pair.Value.TotalSeconds == 0)
-            .Subscribe(pair => SceneManager.LoadScene("ScoreScene"));
+        _mumblingOwners = new Dictionary<AudioClip, KeyValuePair<HumanController, GhostController>>();
 
         _allMumblesHashed = new HashSet<AudioClip>(_allMumbles);
         int index = 0;
         foreach (var mumble in _allMumblesHashed)
         {
-            if(index >= _spawnPoints.Length)
+            if (index >= _spawnPoints.Length)
             {
                 Debug.LogError("You need as many spawn points as mumble sounds");
             }
@@ -78,7 +63,24 @@ public class GameManager : MonoBehaviour
             ghostInstance.SetMumbling(mumble);
             ghostInstance.SetNoteConfiguration(notesConfiguration);
 
-            _mumblingOwners[mumble] = new Tuple<HumanController, GhostController>(humanInstance, ghostInstance);
+            _mumblingOwners[mumble] = new KeyValuePair<HumanController, GhostController>(humanInstance, ghostInstance);
+        }
+    }
+
+    void Update()
+    {
+        _countDown = _countDown.Subtract(TimeSpan.FromSeconds(Time.deltaTime));
+        _countDownChanges.OnNext(_countDown);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _currentWorldStatus = _currentWorldStatus.Advance();
+            _worldChanges.OnNext(_currentWorldStatus);
+        }
+
+        if (_countDown.TotalSeconds <= 0 || _helpScore.isFinished())
+        {
+            SceneManager.LoadScene("ScoreScene");
         }
     }
 
@@ -96,13 +98,14 @@ public class GameManager : MonoBehaviour
     private void OnHumanSuccess(AudioClip mumble)
     {
         var characters = _mumblingOwners[mumble];
-        Destroy(characters.Item1.gameObject);
-        Destroy(characters.Item2.gameObject);
+        Destroy(characters.Key.gameObject);
+        Destroy(characters.Value.gameObject);
         Rescued();
     }
 
     public void Rescued()
     {
-        _ScoreChangesSubject.OnNext(Unit.Default);
+        _helpScore = new HelpScore(_helpScore.current + 1, _helpScore.max);
+        _scoreChanges.OnNext(_helpScore);
     }
 }
