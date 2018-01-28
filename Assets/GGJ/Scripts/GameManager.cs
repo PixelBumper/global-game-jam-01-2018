@@ -90,6 +90,9 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            var findGameObjectWithTag = GameObject.FindWithTag("WorldIndicator");
+            if (findGameObjectWithTag != null) findGameObjectWithTag.SetActive(false);
+
             _currentWorldStatus = _currentWorldStatus.Advance();
             _worldChanges.OnNext(_currentWorldStatus);
         }

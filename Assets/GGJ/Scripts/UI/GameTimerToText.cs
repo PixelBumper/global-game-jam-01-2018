@@ -13,8 +13,8 @@ public class GameTimerToText : MonoBehaviour
         gameManager.CountDownChanges.Subscribe(OnCountdown);
     }
 
-    private void OnCountdown(TimeSpan timeLeft)
+    private void OnCountdown(TimeSpan timeSpan)
     {
-        _textComp.text = string.Format("{0}", timeLeft);
+        _textComp.text = string.Format("{0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
     }
 }
