@@ -38,8 +38,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				.Instance
 				.FireChanges.Subscribe(firePressed =>
 			{
-				if (_speachBubble.active)
-				{
+					_speachBubble.SetActive(true);
 					for (var index = 0; index < _noteConfiguration.Length; index++)
 					{
 						var noteConfig = _noteConfiguration[index];
@@ -50,7 +49,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 							_audioSource.PlayOneShot(noteConfig.Note);
 						}
 					}
-				}
+
 
 			});
 		}
