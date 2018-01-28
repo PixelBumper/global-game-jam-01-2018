@@ -9,7 +9,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 	[RequireComponent(typeof(AudioSource))]
 	public class ThirdPersonCharacter : MonoBehaviour
 	{
-		
+        [SerializeField]
+        private Animator _animator;
 		private float m_MoveSpeedMultiplier = 1f;
 		private Rigidbody m_Rigidbody;
 		private float m_ForwardAmount;
@@ -62,7 +63,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			if (move.magnitude > 1f) move.Normalize();
 			move = transform.InverseTransformDirection(move);
             m_Rigidbody.velocity = move * m_MoveSpeedMultiplier;
-		}
+        }
 
 		public void ShowSpeechBubble()
 		{
@@ -80,6 +81,24 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			{
 				_currentSymbol.SetActive(false);
 			}
-		}
+
+            if(m_Rigidbody.velocity.sqrMagnitude > 0.1f)
+            {
+                var move = m_Rigidbody.velocity;
+                _animator.Play("player@walk");
+                var newScale = _animator.transform.localScale;
+                if(move.x != 0)
+                {
+                    var isMovingLeft = move.x < 0;
+                    var isScalePositive = newScale.x >= 0;
+                    newScale.x = isMovingLeft ? (isScalePositive ? newScale.x : newScale.x * -1) : (isScalePositive ? newScale.x * -1 : newScale.x);
+                    _animator.transform.localScale = newScale;
+                }
+            }
+            else
+            {
+                _animator.Play("player@idle");
+            }
+        }
 	}
 }
