@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/GGJ/Scenes/StartingScene.unity
+    guid: 93263b7bd4257499d8f37bf0d42b9b1c
+  - enabled: 1
     path: Assets/GGJ/Scenes/TutorialSymbols.unity
     guid: eeb87dc65212b4b0191ff57a2ac48cbe
   - enabled: 1
