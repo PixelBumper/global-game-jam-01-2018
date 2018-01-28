@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4543375695442274}
   - component: {fileID: 114872118779504184}
   - component: {fileID: 114332709073767980}
-  - component: {fileID: 135861034885763574}
   - component: {fileID: 54582873221624242}
   - component: {fileID: 82594929716938778}
   m_Layer: 0
@@ -69,23 +68,59 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.9
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 175
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 10
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
   rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0.13932571
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.99438477
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1.0083313
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
@@ -102,31 +137,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
     m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -163,23 +174,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mumblingRange: 3
-  _noteConfiguration:
-  - {fileID: 11400000, guid: ad665cc6f0a044295ae142bfa51e7613, type: 2}
-  - {fileID: 11400000, guid: 4779e2c09aaf04120a62598271ec11ec, type: 2}
-  - {fileID: 11400000, guid: f1d824911dafa43a29a72bec60ad39de, type: 2}
-  - {fileID: 11400000, guid: 0dc04ea7668824769bf09c341146e287, type: 2}
-  _graphics:
-  - {fileID: 95414883667707386, guid: 9d9e5785de7f7f64e90ca06ab186ae00, type: 2}
-  _mumblingSound: {fileID: 8300000, guid: b69a4f5cc832043308b936a03f4668ad, type: 3}
---- !u!135 &135861034885763574
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1114888732423468}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 3
-  m_Center: {x: 0, y: 0, z: 0}
+  _charactersMap: {fileID: 11400000, guid: baf5accf3ad763941b6721b2dd957c06, type: 2}

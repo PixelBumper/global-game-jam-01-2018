@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using GGJ.Scripts.ScriptableObjects;
 using UnityEngine;
@@ -6,14 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(SphereCollider), typeof(AudioSource))]
 public class GhostController : MonoBehaviour
 {
-    [SerializeField]
-    private float _mumblingRange;
-
-    [SerializeField]
-    private float _rangeForPlayingSequence;
-
-    [SerializeField]
-    private SingleNoteConfiguration[] _noteConfiguration;
+    private List<SingleNoteConfiguration> _noteConfiguration;
 
     [SerializeField]
     [TooltipAttribute("the time that has to pass between two sequence ")]
@@ -35,32 +29,33 @@ public class GhostController : MonoBehaviour
     private SphereCollider _sphereCollider;
 
     private int _nextNoteToPlay = 0;
-    private bool _isMumbling = false;
+    private bool _isMumbling = true;
     private bool _isPlayingSequence = false;
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
-        
-        Instantiate(_animators[Random.Range(0, _animators.Length)], transform);
-        
+        Instantiate(_animators[UnityEngine.Random.Range(0, _animators.Length)], transform);
+
         _deltaSinceLastFinishedSequence = _delayBetweenSequenceRepetition;
         _audioSource = GetComponent<AudioSource>();
-
-        GetComponent<SphereCollider>().radius = _mumblingRange;
 
         _speakBubble = transform.Find("SpeakBubble").gameObject;
         _currentPlayingNote = _speakBubble.transform.Find("CurrentNote").gameObject;
 
         _speakBubble.SetActive(false);
-        
+
         _spriteRendererOfCurrentNote = _currentPlayingNote.GetComponent<SpriteRenderer>();
         _spriteRendererOfCurrentNote.sprite = _noteConfiguration[_nextNoteToPlay].Sprite;
     }
 
+    public void SetNoteConfiguration(List<SingleNoteConfiguration> newConfig)
+    {
+        _noteConfiguration = newConfig;
+    }
+
     private void FixedUpdate()
     {
-        
         if (_isMumbling && _audioSource.isPlaying == false)
         {
             _speakBubble.SetActive(false);
@@ -84,7 +79,7 @@ public class GhostController : MonoBehaviour
                 _nextNoteToPlay++;
 
                 // if this was the last note start waiting
-                if (_nextNoteToPlay >= _noteConfiguration.Length)
+                if (_nextNoteToPlay >= _noteConfiguration.Count)
                 {
                     _nextNoteToPlay = 0;
                     _deltaSinceLastFinishedSequence = 0;
@@ -93,37 +88,16 @@ public class GhostController : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    public void SetMumbling(AudioClip mumble)
+    {
+        _mumblingSound = mumble;
+    }
+
+    private void OnTriggerEnter(Collider other)
     {
         if ("Player".Equals(other.gameObject.tag))
         {
-            _isMumbling = true;
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if ("Player".Equals(other.tag))
-        {
-            if (Vector3.Distance(other.transform.position, transform.position) < _rangeForPlayingSequence)
-            {
-                if (_isMumbling)
-                {
-                    _nextNoteToPlay = 0;
-                    _audioSource.Stop();
-                    _speakBubble.SetActive(true);
-                    _isMumbling = false;
-                    _isPlayingSequence = true;
-                }
-
-            }
-            else if (_isPlayingSequence)
-            {
-                _audioSource.Stop();
-                _isMumbling = true;
-                _speakBubble.SetActive(false);
-                _isPlayingSequence = false;
-            }
+            StartMessageSequence();
         }
     }
 
@@ -131,7 +105,24 @@ public class GhostController : MonoBehaviour
     {
         if ("Player".Equals(other.gameObject.tag))
         {
-            _isMumbling = false;
+            StartMumbling();
         }
+    }
+
+    private void StartMumbling()
+    {
+        _audioSource.Stop();
+        _isMumbling = true;
+        _speakBubble.SetActive(false);
+        _isPlayingSequence = false;
+    }
+
+    private void StartMessageSequence()
+    {
+        _nextNoteToPlay = 0;
+        _audioSource.Stop();
+        _speakBubble.SetActive(true);
+        _isMumbling = false;
+        _isPlayingSequence = true;
     }
 }

@@ -1,58 +1,53 @@
 ﻿using GGJ.Scripts.ScriptableObjects;
 using System;
+using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 
-[RequireComponent(typeof(SphereCollider), typeof(AudioSource))]
+[RequireComponent(typeof(AudioSource))]
 public class HumanController : MonoBehaviour
 {
     [SerializeField] private float _mumblingRange;
-    [SerializeField] private SingleNoteConfiguration[] _noteConfiguration;
-    [SerializeField] private Animator[] _graphics;
-    [SerializeField] private AudioClip _mumblingSound;
+    [SerializeField] private MumbleCharacterMap _charactersMap;
 
+    private GameObject _graphics;
+    private AudioClip _mumblingSound;
+    public event Action<AudioClip> OnSuccess;
+    private List<SingleNoteConfiguration> _noteConfiguration;
     private GameObject _currentPlayingNote;
     private AudioSource _audioSource;
-    private SphereCollider _sphereCollider;
     private bool _canMumble = true;
-    private IDisposable _dispisable;
 
     // Use this for initialization
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-        var graphics = _graphics[UnityEngine.Random.Range(0, _graphics.Length)];
-        Instantiate(graphics, transform);
-        GetComponent<SphereCollider>().radius = _mumblingRange;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void SetNoteConfiguration(List<SingleNoteConfiguration> newConfig)
     {
-        if ("Player".Equals(other.gameObject.tag))
+        _noteConfiguration = newConfig;
+    }
+
+    private void Update()
+    {
+        if (!_audioSource.isPlaying)
         {
-            if(_canMumble)
-            {
-                _canMumble = false;
-
-                _dispisable = Observable.Interval(TimeSpan.FromSeconds(_mumblingSound.length))
-                    .Subscribe(_ => { }, Debug.LogException, OnMumbleFinished);
-
-                _audioSource.PlayOneShot(_mumblingSound);
-            }
+            _audioSource.PlayOneShot(_mumblingSound);
         }
     }
 
-    private void OnMumbleFinished()
+    public void SetMumbling(AudioClip mumble)
     {
-        Debug.Log("OnMumbleFinished");
-        _canMumble = true;
-    }
-
-    private void OnDestroy()
-    {
-        if(_dispisable != null)
+        _mumblingSound = mumble;
+        GameObject prefab;
+        if (_charactersMap.MumbleToHumans.TryGetValue(mumble, out prefab))
         {
-            _dispisable.Dispose();
+            Instantiate(prefab, transform);
+        }
+        else
+        {
+            Debug.LogError("No human matching that mumble");
         }
     }
 }

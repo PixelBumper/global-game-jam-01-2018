@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 212519071904594666}
   - component: {fileID: 114768914717212446}
   m_Layer: 0
-  m_Name: Girl0001
+  m_Name: Guy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,7 +51,7 @@ Animator:
   m_GameObject: {fileID: 1659990856443678}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f04786c67c53da24baa4e61041d3c253, type: 2}
+  m_Controller: {fileID: 9100000, guid: 07d57a317b5f56642a38a44838b6a07d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -104,7 +104,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 92e4ce315454142dc8d613b88cb3783d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c7de2388bcd9a4eb8bacb3647081dd98, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

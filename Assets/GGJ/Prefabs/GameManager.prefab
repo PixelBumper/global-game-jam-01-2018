@@ -52,3 +52,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameSettings: {fileID: 11400000, guid: 5f6af9e1f3527d945bd3130566fc620e, type: 2}
+  _allNotes:
+  - {fileID: 11400000, guid: ad665cc6f0a044295ae142bfa51e7613, type: 2}
+  - {fileID: 11400000, guid: 4779e2c09aaf04120a62598271ec11ec, type: 2}
+  - {fileID: 11400000, guid: f1d824911dafa43a29a72bec60ad39de, type: 2}
+  - {fileID: 11400000, guid: 0dc04ea7668824769bf09c341146e287, type: 2}
+  _allMumbles:
+  - {fileID: 8300000, guid: 69c5ee23e785740f9b38ef73da47a9a7, type: 3}
+  - {fileID: 8300000, guid: 6a420a746ac5042658c2788c49f9c593, type: 3}
+  - {fileID: 8300000, guid: 89b64267f706a4f80b784f23ec03cdcf, type: 3}
+  _humanControllerPrefab: {fileID: 114872118779504184, guid: 467afc82981cd2940afee5864d4f5724,
+    type: 2}
+  _ghostControllerPrefab: {fileID: 114840200885089860, guid: 0fc8176a0173f4a8480848e4cd1edb1f,
+    type: 2}
+  _spawnPoints:
+  - HumanPosition: {fileID: 0}
+    GhostPosition: {fileID: 0}
+  - HumanPosition: {fileID: 0}
+    GhostPosition: {fileID: 0}
+  - HumanPosition: {fileID: 0}
+    GhostPosition: {fileID: 0}
