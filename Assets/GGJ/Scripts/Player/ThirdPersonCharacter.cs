@@ -1,6 +1,5 @@
 using GGJ.Scripts;
 using GGJ.Scripts.ScriptableObjects;
-using UniRx;
 using UnityEngine;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
