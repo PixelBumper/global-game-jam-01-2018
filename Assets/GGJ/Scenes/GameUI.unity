@@ -1068,7 +1068,7 @@ GameObject:
   - component: {fileID: 1490752968}
   m_Layer: 5
   m_Name: WorldIndicator
-  m_TagString: Untagged
+  m_TagString: WorldIndicator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
