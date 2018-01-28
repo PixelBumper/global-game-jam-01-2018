@@ -72,20 +72,20 @@ public class GhostController : MonoBehaviour
                 // hide note in case we are waiting for the delay to be over
                 _speakBubble.SetActive(false);
             }
-            else
+            else if (_nextNoteToPlay < _noteConfiguration.Count)
             {
                 // play the next note in the sequence
                 _speakBubble.SetActive(true);
                 _spriteRendererOfCurrentNote.sprite = _noteConfiguration[_nextNoteToPlay].Sprite;
                 _audioSource.PlayOneShot(_noteConfiguration[_nextNoteToPlay].Note);
                 _nextNoteToPlay++;
-
-                // if this was the last note start waiting
-                if (_nextNoteToPlay >= _noteConfiguration.Count)
-                {
-                    _nextNoteToPlay = 0;
-                    _deltaSinceLastFinishedSequence = 0;
-                }
+            }
+            else
+            {
+                _speakBubble.SetActive(false);
+                _audioSource.PlayOneShot(_mumblingSound);
+                _nextNoteToPlay = 0;
+                _deltaSinceLastFinishedSequence = 0;
             }
         }
     }
