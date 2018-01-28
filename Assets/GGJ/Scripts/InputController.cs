@@ -21,7 +21,7 @@ namespace GGJ.Scripts
 
         public IObservable<EFire> FireChanges;
 
-        void Start()
+        private void Awake()
         {
             if (_instance != null)
             {
@@ -29,7 +29,7 @@ namespace GGJ.Scripts
                 return;
             }
             _instance = this;
-
+            
             DontDestroyOnLoad(gameObject);
 
             FireChanges = Observable.EveryUpdate()
@@ -40,5 +40,6 @@ namespace GGJ.Scripts
                         .Where(fire => Input.GetButtonDown(fire.ToString()))
                 );
         }
+
     }
 }
