@@ -6,16 +6,17 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class HumanController : MonoBehaviour
 {
-    [SerializeField] private float _mumblingRange;
     [SerializeField] private MumbleCharacterMap _charactersMap;
 
     private GameObject _graphics;
     private AudioClip _mumblingSound;
+    private AudioClip _longMumblingSound;
     public event Action<AudioClip> OnSuccess;
     private List<SingleNoteConfiguration> _noteConfiguration;
     private GameObject _currentPlayingNote;
     private AudioSource _audioSource;
-    private bool _canMumble = true;
+    private bool _shouldMumble = true;
+    private bool _mumbleFlip = false;
 
     // Use this for initialization
     private void Start()
@@ -30,9 +31,11 @@ public class HumanController : MonoBehaviour
 
     private void Update()
     {
-        if (!_audioSource.isPlaying)
+        if (_shouldMumble && !_audioSource.isPlaying)
         {
-            _audioSource.PlayOneShot(_mumblingSound);
+            var currentMumble = _mumbleFlip ? _longMumblingSound : _mumblingSound;
+            _mumbleFlip = !_mumbleFlip;
+            _audioSource.PlayOneShot(currentMumble);
         }
     }
 
@@ -48,5 +51,38 @@ public class HumanController : MonoBehaviour
         {
             Debug.LogError("No human matching that mumble");
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if ("Player".Equals(other.gameObject.tag))
+        {
+            WaitForInputSequence();
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if ("Player".Equals(other.gameObject.tag))
+        {
+            StartMumbling();
+        }
+    }
+
+    private void WaitForInputSequence()
+    {
+        _shouldMumble = false;
+        _audioSource.Stop();
+    }
+
+    private void StartMumbling()
+    {
+        _audioSource.Stop();
+        _shouldMumble = true;
+    }
+
+    internal void SetLongMumbling(AudioClip longMumble)
+    {
+        _longMumblingSound = longMumble;
     }
 }

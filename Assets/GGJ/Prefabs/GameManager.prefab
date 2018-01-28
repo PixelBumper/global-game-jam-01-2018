@@ -61,6 +61,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 69c5ee23e785740f9b38ef73da47a9a7, type: 3}
   - {fileID: 8300000, guid: 6a420a746ac5042658c2788c49f9c593, type: 3}
   - {fileID: 8300000, guid: 89b64267f706a4f80b784f23ec03cdcf, type: 3}
+  _allLongMumbles:
+  - {fileID: 8300000, guid: a053301be13804c2abd5e693cb37e6ce, type: 3}
+  - {fileID: 8300000, guid: 4a1afa30e73f0407c8c18f0efa9ae219, type: 3}
+  - {fileID: 8300000, guid: 0cbc38b83085542fe9f9a545c3dd121b, type: 3}
   _humanControllerPrefab: {fileID: 114872118779504184, guid: 467afc82981cd2940afee5864d4f5724,
     type: 2}
   _ghostControllerPrefab: {fileID: 114840200885089860, guid: 0fc8176a0173f4a8480848e4cd1edb1f,

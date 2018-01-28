@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameSettings _gameSettings;
     [SerializeField] private SingleNoteConfiguration[] _allNotes;
     [SerializeField] private AudioClip[] _allMumbles;
+    [SerializeField] private AudioClip[] _allLongMumbles;
     [SerializeField] private HumanController _humanControllerPrefab;
     [SerializeField] private GhostController _ghostControllerPrefab;
     [SerializeField] private TupleSpawnPoint[] _spawnPoints;
@@ -27,7 +28,6 @@ public class GameManager : MonoBehaviour
     private readonly SimpleObservable<EWorldStatus> _worldChanges = new SimpleObservable<EWorldStatus>();
     private EWorldStatus _currentWorldStatus = EWorldStatus.Living;
 
-    private HashSet<AudioClip> _allMumblesHashed;
     private Dictionary<AudioClip, KeyValuePair<HumanController, GhostController>> _mumblingOwners;
 
     private void Awake()
@@ -42,22 +42,35 @@ public class GameManager : MonoBehaviour
 
         _mumblingOwners = new Dictionary<AudioClip, KeyValuePair<HumanController, GhostController>>();
 
-        _allMumblesHashed = new HashSet<AudioClip>(_allMumbles);
-        int index = 0;
-        foreach (var mumble in _allMumblesHashed)
+        List<int> randomIndexList = new List<int>();
+        for (int i = 0; i < _allMumbles.Length; i++)
         {
-            if (index >= _spawnPoints.Length)
+            randomIndexList.Add(i);
+        }
+
+        for (int i = 0; i < _allMumbles.Length; i++)
+        {
+            var randomIndex = UnityEngine.Random.Range(0, randomIndexList.Count);
+            var index = randomIndexList[randomIndex];
+            randomIndexList.RemoveAt(randomIndex);
+
+            if (i >= _spawnPoints.Length)
             {
                 Debug.LogError("You need as many spawn points as mumble sounds");
+                return;
             }
 
-            var positions = _spawnPoints[index++];
+            var mumble = _allMumbles[index];
+            var longMumble = _allLongMumbles[index];
+
+            var positions = _spawnPoints[index];
             var notesConfiguration = GetRandomNotesConfiguration();
             var humanInstance = Instantiate(_humanControllerPrefab);
             humanInstance.transform.position = positions.HumanPosition.position;
             humanInstance.OnSuccess += OnHumanSuccess;
             humanInstance.SetNoteConfiguration(notesConfiguration);
             humanInstance.SetMumbling(mumble);
+            humanInstance.SetLongMumbling(longMumble);
             var ghostInstance = Instantiate(_ghostControllerPrefab);
             ghostInstance.transform.position = positions.GhostPosition.position;
             ghostInstance.SetMumbling(mumble);
