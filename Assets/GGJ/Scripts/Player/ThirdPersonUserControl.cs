@@ -15,17 +15,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             m_Character = GetComponent<ThirdPersonCharacter>();
         }
 
-        // Fixed update is called in sync with physics
         private void FixedUpdate()
         {
-            // read inputs
-            float h = Input.GetAxis("Horizontal");
-            float v = Input.GetAxis("Vertical");
-
-            if (h != 0)
-            {
-                v = 0;
-            }
+            var h = Input.GetAxis("Horizontal");
+            var v = Input.GetAxis("Vertical");
 
             m_Move = v * Vector3.forward + h * Vector3.right;
 
