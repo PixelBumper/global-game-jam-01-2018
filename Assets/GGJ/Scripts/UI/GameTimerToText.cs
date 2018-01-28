@@ -1,6 +1,5 @@
 ﻿using System;
 using TMPro;
-using UniRx;
 using UnityEngine;
 
 public class GameTimerToText : MonoBehaviour
@@ -11,7 +10,7 @@ public class GameTimerToText : MonoBehaviour
     {
         _textComp = GetComponent<TextMeshProUGUI>();
         var gameManager = FindObjectOfType<GameManager>();
-        gameManager.CountDown.Subscribe(OnCountdown);
+        gameManager.CountDownChanges.Subscribe(OnCountdown);
     }
 
     private void OnCountdown(TimeSpan timeLeft)

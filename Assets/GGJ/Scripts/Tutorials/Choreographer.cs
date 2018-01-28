@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using GGJ.Scripts.ScriptableObjects;
-using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
