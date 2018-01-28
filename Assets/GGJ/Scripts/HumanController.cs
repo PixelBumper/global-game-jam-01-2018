@@ -17,7 +17,6 @@ public class HumanController : MonoBehaviour
     private GameObject _currentPlayingNote;
     private AudioSource _audioSource;
     private bool _canMumble = true;
-    private IDisposable _dispisable;
 
     // Use this for initialization
     private void Start()

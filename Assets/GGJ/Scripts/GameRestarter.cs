@@ -1,23 +1,20 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameRestarter : MonoBehaviour {
-	private CompositeDisposable _compositeDisposable = new CompositeDisposable();
+	private DateTime _started;
 
 	void Start ()
 	{
-		_compositeDisposable.Add(Observable.EveryUpdate()
-			.Where(_ => Input.GetKeyDown(KeyCode.Space))
-			.DelaySubscription(TimeSpan.FromSeconds(3))
-			.Subscribe(_ => SceneManager.LoadScene("Main")));
+		_started = DateTime.Now;
 	}
 
-	void OnDestroy ()
+	void Update()
 	{
-		_compositeDisposable.Clear();
+		if (Input.GetKeyDown(KeyCode.Space) && DateTime.Now.Subtract(_started).TotalSeconds > 3)
+		{
+			SceneManager.LoadScene("Main");
+		}
 	}
 }

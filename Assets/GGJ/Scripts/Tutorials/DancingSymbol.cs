@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using GGJ.Scripts.ScriptableObjects;
-using UniRx;
 using UnityEngine;
 using DG.Tweening;
 using System;
@@ -15,8 +14,6 @@ namespace GGJ.Scripts
 
         [SerializeField] private SpriteRenderer _singleNoteSprite;
         private AudioSource _audioSource;
-
-        private IDisposable _disposableObserver;
 
         public SingleNoteConfiguration SingleNoteConfig
         {
@@ -38,11 +35,6 @@ namespace GGJ.Scripts
             _audioSource = GetComponent<AudioSource>();
 
             // _disposableObserver = InputController.Instance.FireChanges.Subscribe(OnFirePressed);
-        }
-
-        public void OnDestroy()
-        {
-            _disposableObserver.Dispose();
         }
 
         private void OnFirePressed(EFire firePressed)
