@@ -33,8 +33,12 @@ namespace GGJ.Scripts
             _singleNoteSprite.sprite = _singleNoteConfiguration.Sprite;
 
             _audioSource = GetComponent<AudioSource>();
-
             InputController.Instance.FireChanges.Subscribe(OnFirePressed);
+        }
+
+        public void OnDestroy()
+        {
+            InputController.Instance.FireChanges.Unsbscribe(OnFirePressed);
         }
 
         private void OnFirePressed(EFire firePressed)
@@ -43,7 +47,7 @@ namespace GGJ.Scripts
             {
                 return;
             }
-            
+
             if (firePressed.ToString().Equals(_singleNoteConfiguration.button))
             {
                 _audioSource.PlayOneShot(_singleNoteConfiguration.Note);

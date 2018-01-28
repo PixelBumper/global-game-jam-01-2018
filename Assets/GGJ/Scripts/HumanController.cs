@@ -138,6 +138,7 @@ public class HumanController : MonoBehaviour
     private void OnDestroy()
     {
         _audioSource.Stop();
+        InputController.Instance.FireChanges.Unsbscribe(OnPlayerFireAction);
     }
 
     private void AnimateGoodbye()

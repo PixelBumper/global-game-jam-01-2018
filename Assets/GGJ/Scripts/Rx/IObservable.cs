@@ -5,4 +5,6 @@ public interface IObservable<T> {
 
 	// Quick win win for unsubscribing.
 	void Unsbscribe(Action<T> action);
+
+	void UnsubscribeAllTheThings();
 }
