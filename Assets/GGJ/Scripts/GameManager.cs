@@ -1,6 +1,7 @@
 ﻿using GGJ.Scripts.ScriptableObjects;
 using System;
 using System.Collections.Generic;
+using GGJ.Scripts;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -99,6 +100,8 @@ public class GameManager : MonoBehaviour
 
         if (_countDown.TotalSeconds <= 0 || _helpScore.isFinished())
         {
+            InputController.Instance._score = _helpScore.current + "/" + _helpScore.max;
+            InputController.Instance._timeLeft = _countDown.ToString();
             SceneManager.LoadScene("ScoreScene");
         }
     }

@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 369416482}
   - component: {fileID: 369416481}
   m_Layer: 5
-  m_Name: TextMeshPro Text (1)
+  m_Name: totalHelps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1265,7 +1265,7 @@ GameObject:
   - component: {fileID: 1232113045}
   - component: {fileID: 1232113044}
   m_Layer: 5
-  m_Name: TextMeshPro Text (1)
+  m_Name: timeLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

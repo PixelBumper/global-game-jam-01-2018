@@ -17,6 +17,9 @@ namespace GGJ.Scripts
             }
         }
 
+        public string _timeLeft;
+        public string _score;
+
 
         public IObservable<EFire> FireChanges { get { return _fireChanges; } }
         private SimpleObservable<EFire> _fireChanges = new SimpleObservable<EFire>();
