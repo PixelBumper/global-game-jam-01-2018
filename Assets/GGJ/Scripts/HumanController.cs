@@ -91,7 +91,7 @@ public class HumanController : MonoBehaviour
 
     private void OnPlayerFireAction(EFire firePressed)
     {
-        if (_shouldMumble || _isFinished)
+        if (_shouldMumble || _isFinished || this == null)
         {
             return;
         }
@@ -119,7 +119,7 @@ public class HumanController : MonoBehaviour
 
         if (_symbolsEntered >= _noteConfiguration.Count)
         {
-            if (indexOfSymbol == _nextCorrectIndex)
+            if (indexOfSymbol >= _nextCorrectIndex)
             {
                 _isFinished = true;
                 AnimateGoodbye();
@@ -133,6 +133,11 @@ public class HumanController : MonoBehaviour
                 _nextCorrectIndex = 0;
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        _audioSource.Stop();
     }
 
     private void AnimateGoodbye()

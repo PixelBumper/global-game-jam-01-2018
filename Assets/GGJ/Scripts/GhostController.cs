@@ -127,4 +127,9 @@ public class GhostController : MonoBehaviour
         _isMumbling = false;
         _isPlayingSequence = true;
     }
+
+    private void OnDestroy()
+    {
+        _audioSource.Stop();
+    }
 }

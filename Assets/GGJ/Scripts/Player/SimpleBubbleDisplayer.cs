@@ -70,4 +70,9 @@ public class SimpleBubbleDisplayer : MonoBehaviour
         yield return _waitForSeconds;
         _speakBubble.SetActive(false);
     }
+
+    private void OnDestroy()
+    {
+        _audioSource.Stop();
+    }
 }
