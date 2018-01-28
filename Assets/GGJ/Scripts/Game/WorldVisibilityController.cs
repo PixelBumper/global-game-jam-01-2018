@@ -9,6 +9,7 @@ public class WorldVisibilityController : MonoBehaviour
     {
         var gameManager = FindObjectOfType<GameManager>();
         gameManager.WorldChanges.Subscribe(OnWorldChanges);
+        OnWorldChanges(EWorldStatus.Living);
     }
 
     private void OnWorldChanges(EWorldStatus newStatus)
