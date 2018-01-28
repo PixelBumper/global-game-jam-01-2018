@@ -18,6 +18,19 @@ class SimpleObservable<T> : IObservable<T>
 		}
 	}
 
+	public void Unsbscribe(Action<T> action)
+	{
+		for (var index = 0; index < _actions.Count; index++)
+		{
+			var foo = _actions[index];
+
+			if (action.Equals(foo))
+			{
+				_actions[index] = null; // Force GC.
+			}
+		}
+	}
+
 	public void OnNext(T t)
 	{
 		emit(t);
@@ -29,7 +42,11 @@ class SimpleObservable<T> : IObservable<T>
 		for (var index = 0; index < _actions.Count; index++)
 		{
 			var action = _actions[index];
-			action.Invoke(t);
+
+			if (action != null)
+			{
+				action.Invoke(t);
+			}
 		}
 	}
 
