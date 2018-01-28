@@ -65,6 +65,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a053301be13804c2abd5e693cb37e6ce, type: 3}
   - {fileID: 8300000, guid: 4a1afa30e73f0407c8c18f0efa9ae219, type: 3}
   - {fileID: 8300000, guid: 0cbc38b83085542fe9f9a545c3dd121b, type: 3}
+  _allEhMumbles:
+  - {fileID: 8300000, guid: 4471ed51beda64416852b3c6681e338d, type: 3}
+  - {fileID: 8300000, guid: 9ab30714e27c544a7adc6b4eece3c005, type: 3}
+  - {fileID: 8300000, guid: f807f01bfba5746df8921fc2db71ea2d, type: 3}
   _humanControllerPrefab: {fileID: 114872118779504184, guid: 467afc82981cd2940afee5864d4f5724,
     type: 2}
   _ghostControllerPrefab: {fileID: 114840200885089860, guid: 0fc8176a0173f4a8480848e4cd1edb1f,

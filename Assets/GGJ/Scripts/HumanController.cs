@@ -11,6 +11,7 @@ public class HumanController : MonoBehaviour
     private GameObject _graphics;
     private AudioClip _mumblingSound;
     private AudioClip _longMumblingSound;
+    private AudioClip _ehMumble;
     public event Action<AudioClip> OnSuccess;
     private List<SingleNoteConfiguration> _noteConfiguration;
     private GameObject _currentPlayingNote;
@@ -73,6 +74,7 @@ public class HumanController : MonoBehaviour
     {
         _shouldMumble = false;
         _audioSource.Stop();
+        _audioSource.PlayOneShot(_ehMumble);
     }
 
     private void StartMumbling()
@@ -84,5 +86,10 @@ public class HumanController : MonoBehaviour
     internal void SetLongMumbling(AudioClip longMumble)
     {
         _longMumblingSound = longMumble;
+    }
+
+    internal void SetEhMumble(AudioClip ehMumble)
+    {
+        _ehMumble = ehMumble;
     }
 }

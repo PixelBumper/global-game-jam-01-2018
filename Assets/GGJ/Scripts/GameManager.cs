@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SingleNoteConfiguration[] _allNotes;
     [SerializeField] private AudioClip[] _allMumbles;
     [SerializeField] private AudioClip[] _allLongMumbles;
+    [SerializeField] private AudioClip[] _allEhMumbles;
     [SerializeField] private HumanController _humanControllerPrefab;
     [SerializeField] private GhostController _ghostControllerPrefab;
     [SerializeField] private TupleSpawnPoint[] _spawnPoints;
@@ -62,6 +63,7 @@ public class GameManager : MonoBehaviour
 
             var mumble = _allMumbles[index];
             var longMumble = _allLongMumbles[index];
+            var ehMumble = _allEhMumbles[index];
 
             var positions = _spawnPoints[index];
             var notesConfiguration = GetRandomNotesConfiguration();
@@ -71,6 +73,7 @@ public class GameManager : MonoBehaviour
             humanInstance.SetNoteConfiguration(notesConfiguration);
             humanInstance.SetMumbling(mumble);
             humanInstance.SetLongMumbling(longMumble);
+            humanInstance.SetEhMumble(ehMumble);
             var ghostInstance = Instantiate(_ghostControllerPrefab);
             ghostInstance.transform.position = positions.GhostPosition.position;
             ghostInstance.SetMumbling(mumble);
