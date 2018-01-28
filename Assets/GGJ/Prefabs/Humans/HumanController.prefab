@@ -175,6 +175,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _charactersMap: {fileID: 11400000, guid: baf5accf3ad763941b6721b2dd957c06, type: 2}
+  _successSoundClip: {fileID: 8300000, guid: fafc41f4949da4dacbdfde8614ec98d8, type: 3}
+  _failureSoundClip: {fileID: 8300000, guid: 5fc5b410e031240209ee6280da122f10, type: 3}
 --- !u!135 &135374182135086988
 SphereCollider:
   m_ObjectHideFlags: 1
