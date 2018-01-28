@@ -13,6 +13,10 @@ public class WorldVisibilityController : MonoBehaviour
 
     private void OnWorldChanges(EWorldStatus newStatus)
     {
+        if (this == null)
+        {
+            return;
+        }
         var shouldBeVisible = _visibleStatus == newStatus;
         if (gameObject.activeSelf != shouldBeVisible)
         {
