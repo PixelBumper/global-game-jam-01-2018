@@ -56,8 +56,8 @@ public class GameManager : MonoBehaviour
         {
             var go = goes[index];
             spawningPoints[index] = new TupleSpawnPoint();
-            spawningPoints[index].HumanPosition = go.transform.FindChild("Human").transform;
-            spawningPoints[index].GhostPosition = go.transform.FindChild("Ghost").transform;
+            spawningPoints[index].HumanPosition = go.transform.Find("Human").transform;
+            spawningPoints[index].GhostPosition = go.transform.Find("Ghost").transform;
         }
 
         int n = spawningPoints.Length;
@@ -110,9 +110,6 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            var findGameObjectWithTag = GameObject.FindWithTag("WorldIndicator");
-            if (findGameObjectWithTag != null) findGameObjectWithTag.SetActive(false);
-
             _currentWorldStatus = _currentWorldStatus.Advance();
             _worldChanges.OnNext(_currentWorldStatus);
         }
