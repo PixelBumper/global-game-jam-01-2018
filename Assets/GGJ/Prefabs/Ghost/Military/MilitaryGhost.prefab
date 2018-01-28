@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4966557433920624}
   - component: {fileID: 212706018384863276}
   - component: {fileID: 95275514689023254}
+  - component: {fileID: 114947940782445690}
   m_Layer: 0
   m_Name: MilitaryGhost
   m_TagString: Untagged
@@ -58,6 +59,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114947940782445690
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1024082918862742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b25216e2e51343c5a86da2c98a7cf1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212706018384863276
 SpriteRenderer:
   m_ObjectHideFlags: 1
