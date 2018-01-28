@@ -1,29 +1,36 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 class SimpleObservable<T> : IObservable<T>
 {
-	private Action<T> _action;
+	private IList<Action<T>> _actions = new List<Action<T>>();
 	private Sergio<T> _last;
 
 	public void Subscribe(Action<T> action)
 	{
-		_action = action;
+		_actions.Add(action);
 
 		if (_last != null)
 		{
-			_action.Invoke(_last.t);
+			emit(_last.t);
 			_last = null;
 		}
 	}
 
 	public void OnNext(T t)
 	{
-		if (_action != null)
-		{
-			_action.Invoke(t);
-		}
-
+		emit(t);
 		_last = new Sergio<T>(t);
+	}
+
+	private void emit(T t)
+	{
+		for (var index = 0; index < _actions.Count; index++)
+		{
+			var action = _actions[index];
+			action.Invoke(t);
+		}
 	}
 
 	class Sergio<T>
