@@ -50,13 +50,32 @@ public class GameManager : MonoBehaviour
             randomIndexList.Add(i);
         }
 
+        var goes = GameObject.FindGameObjectsWithTag("spawningPositions");
+        var spawningPoints = new TupleSpawnPoint[goes.Length];
+        for (var index = 0; index < goes.Length; index++)
+        {
+            var go = goes[index];
+            spawningPoints[index] = new TupleSpawnPoint();
+            spawningPoints[index].HumanPosition = go.transform.FindChild("Human").transform;
+            spawningPoints[index].GhostPosition = go.transform.FindChild("Ghost").transform;
+        }
+
+        int n = spawningPoints.Length;
+        while (n > 1) 
+        {
+            int k = UnityEngine.Random.Range(0, n--);
+            TupleSpawnPoint temp = spawningPoints[n];
+            spawningPoints[n] = spawningPoints[k];
+            spawningPoints[k] = temp;
+        }
+        
         for (int i = 0; i < _allMumbles.Length; i++)
         {
             var randomIndex = UnityEngine.Random.Range(0, randomIndexList.Count);
             var index = randomIndexList[randomIndex];
             randomIndexList.RemoveAt(randomIndex);
 
-            if (i >= _spawnPoints.Length)
+            if (i >= spawningPoints.Length)
             {
                 Debug.LogError("You need as many spawn points as mumble sounds");
                 return;
@@ -66,7 +85,7 @@ public class GameManager : MonoBehaviour
             var longMumble = _allLongMumbles[index];
             var ehMumble = _allEhMumbles[index];
 
-            var positions = _spawnPoints[index];
+            var positions = spawningPoints[index];
             var notesConfiguration = GetRandomNotesConfiguration();
             var humanInstance = Instantiate(_humanControllerPrefab);
             humanInstance.transform.position = positions.HumanPosition.position;
@@ -129,13 +148,5 @@ public class GameManager : MonoBehaviour
     {
         _helpScore = new HelpScore(_helpScore.current + 1, _helpScore.max);
         _scoreChanges.OnNext(_helpScore);
-    }
-
-    private void OnDestroy()
-    {
-        InputController.Instance.FireChanges.UnsubscribeAllTheThings();
-        _scoreChanges.UnsubscribeAllTheThings();
-        _worldChanges.UnsubscribeAllTheThings();
-        _countDownChanges.UnsubscribeAllTheThings();
     }
 }
