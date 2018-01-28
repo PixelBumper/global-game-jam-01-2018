@@ -1760,6 +1760,16 @@ Prefab:
       propertyPath: _spawnPoints.Array.data[2].GhostPosition
       value: 
       objectReference: {fileID: 1983638012}
+    - target: {fileID: 114864571656778806, guid: a33af6f05cd61a74698b989f6ea64346,
+        type: 2}
+      propertyPath: _spawnPoints.Array.data[3].HumanPosition
+      value: 
+      objectReference: {fileID: 1316458860}
+    - target: {fileID: 114864571656778806, guid: a33af6f05cd61a74698b989f6ea64346,
+        type: 2}
+      propertyPath: _spawnPoints.Array.data[3].GhostPosition
+      value: 
+      objectReference: {fileID: 1777697127}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a33af6f05cd61a74698b989f6ea64346, type: 2}
   m_IsPrefabParent: 0
@@ -2604,6 +2614,11 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!4 &1316458860 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4075562354392716, guid: 16fe8306e96368d49b5b4b8c92af8675,
+    type: 2}
+  m_PrefabInternal: {fileID: 1983638011}
 --- !u!1001 &1352502308
 Prefab:
   m_ObjectHideFlags: 0
@@ -3020,6 +3035,11 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!4 &1777697127 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4839658005033460, guid: 16fe8306e96368d49b5b4b8c92af8675,
+    type: 2}
+  m_PrefabInternal: {fileID: 1983638011}
 --- !u!1 &1782348173
 GameObject:
   m_ObjectHideFlags: 0
@@ -3469,12 +3489,12 @@ Prefab:
   m_IsPrefabParent: 0
 --- !u!4 &1983638012 stripped
 Transform:
-  m_PrefabParentObject: {fileID: 4839658005033460, guid: 16fe8306e96368d49b5b4b8c92af8675,
+  m_PrefabParentObject: {fileID: 4130501597972600, guid: 16fe8306e96368d49b5b4b8c92af8675,
     type: 2}
   m_PrefabInternal: {fileID: 1983638011}
 --- !u!4 &1983638013 stripped
 Transform:
-  m_PrefabParentObject: {fileID: 4075562354392716, guid: 16fe8306e96368d49b5b4b8c92af8675,
+  m_PrefabParentObject: {fileID: 4317528250041616, guid: 16fe8306e96368d49b5b4b8c92af8675,
     type: 2}
   m_PrefabInternal: {fileID: 1983638011}
 --- !u!4 &1983638014 stripped
