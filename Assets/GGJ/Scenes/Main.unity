@@ -2457,7 +2457,7 @@ SpriteRenderer:
   m_MaskInteraction: 0
 --- !u!4 &1316458860 stripped
 Transform:
-  m_PrefabParentObject: {fileID: 4075562354392716, guid: 16fe8306e96368d49b5b4b8c92af8675,
+  m_PrefabParentObject: {fileID: 4595472394794880, guid: 16fe8306e96368d49b5b4b8c92af8675,
     type: 2}
   m_PrefabInternal: {fileID: 1983638011}
 --- !u!1001 &1352502308
@@ -2848,7 +2848,7 @@ SpriteRenderer:
   m_MaskInteraction: 0
 --- !u!4 &1777697127 stripped
 Transform:
-  m_PrefabParentObject: {fileID: 4839658005033460, guid: 16fe8306e96368d49b5b4b8c92af8675,
+  m_PrefabParentObject: {fileID: 4125658186522106, guid: 16fe8306e96368d49b5b4b8c92af8675,
     type: 2}
   m_PrefabInternal: {fileID: 1983638011}
 --- !u!1 &1782348173
