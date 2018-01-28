@@ -1,6 +1,5 @@
 ﻿using TMPro;
 using UnityEngine;
-using UniRx;
 
 public class HighScoreToText : MonoBehaviour
 {

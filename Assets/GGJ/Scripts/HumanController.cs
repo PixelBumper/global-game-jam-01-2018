@@ -1,7 +1,6 @@
 ﻿using GGJ.Scripts.ScriptableObjects;
 using System;
 using System.Collections.Generic;
-using UniRx;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
