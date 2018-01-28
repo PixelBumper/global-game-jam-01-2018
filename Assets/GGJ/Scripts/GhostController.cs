@@ -7,12 +7,6 @@ using UnityEngine;
 [RequireComponent(typeof(SphereCollider), typeof(AudioSource))]
 public class GhostController : MonoBehaviour
 {
-    [SerializeField]
-    private float _mumblingRange;
-
-    [SerializeField]
-    private float _rangeForPlayingSequence;
-
     private List<SingleNoteConfiguration> _noteConfiguration;
 
     [SerializeField]
@@ -35,24 +29,22 @@ public class GhostController : MonoBehaviour
     private SphereCollider _sphereCollider;
 
     private int _nextNoteToPlay = 0;
-    private bool _isMumbling = false;
+    private bool _isMumbling = true;
     private bool _isPlayingSequence = false;
 
     // Use this for initialization
     private void Start()
     {
         Instantiate(_animators[UnityEngine.Random.Range(0, _animators.Length)], transform);
-        
+
         _deltaSinceLastFinishedSequence = _delayBetweenSequenceRepetition;
         _audioSource = GetComponent<AudioSource>();
-
-        GetComponent<SphereCollider>().radius = _mumblingRange;
 
         _speakBubble = transform.Find("SpeakBubble").gameObject;
         _currentPlayingNote = _speakBubble.transform.Find("CurrentNote").gameObject;
 
         _speakBubble.SetActive(false);
-        
+
         _spriteRendererOfCurrentNote = _currentPlayingNote.GetComponent<SpriteRenderer>();
         _spriteRendererOfCurrentNote.sprite = _noteConfiguration[_nextNoteToPlay].Sprite;
     }
@@ -101,37 +93,11 @@ public class GhostController : MonoBehaviour
         _mumblingSound = mumble;
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if ("Player".Equals(other.gameObject.tag))
         {
-            _isMumbling = true;
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if ("Player".Equals(other.tag))
-        {
-            if (Vector3.Distance(other.transform.position, transform.position) < _rangeForPlayingSequence)
-            {
-                if (_isMumbling)
-                {
-                    _nextNoteToPlay = 0;
-                    _audioSource.Stop();
-                    _speakBubble.SetActive(true);
-                    _isMumbling = false;
-                    _isPlayingSequence = true;
-                }
-
-            }
-            else if (_isPlayingSequence)
-            {
-                _audioSource.Stop();
-                _isMumbling = true;
-                _speakBubble.SetActive(false);
-                _isPlayingSequence = false;
-            }
+            StartMessageSequence();
         }
     }
 
@@ -139,7 +105,24 @@ public class GhostController : MonoBehaviour
     {
         if ("Player".Equals(other.gameObject.tag))
         {
-            _isMumbling = false;
+            StartMumbling();
         }
+    }
+
+    private void StartMumbling()
+    {
+        _audioSource.Stop();
+        _isMumbling = true;
+        _speakBubble.SetActive(false);
+        _isPlayingSequence = false;
+    }
+
+    private void StartMessageSequence()
+    {
+        _nextNoteToPlay = 0;
+        _audioSource.Stop();
+        _speakBubble.SetActive(true);
+        _isMumbling = false;
+        _isPlayingSequence = true;
     }
 }
