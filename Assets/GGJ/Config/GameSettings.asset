@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Name: GameSettings
   m_EditorClassIdentifier: 
   _gameDurationSeconds: 120
-  _playerSpeed: 10
+  _playerSpeed: 3
   _availableNotes:
   - {fileID: 11400000, guid: ad665cc6f0a044295ae142bfa51e7613, type: 2}
   - {fileID: 11400000, guid: 4779e2c09aaf04120a62598271ec11ec, type: 2}
   - {fileID: 11400000, guid: f1d824911dafa43a29a72bec60ad39de, type: 2}
   - {fileID: 11400000, guid: 0dc04ea7668824769bf09c341146e287, type: 2}
-  _maximumHelps: 10
-  _rangeForHearingGhostPresence: 3
-  _rangeForPlayingSequenceOfGhost: 1.5
+  _maximumHelps: 3
+  _rangeForHearingGhostPresence: 10
+  _rangeForPlayingSequenceOfGhost: 3
   _rangeForHearingHuman: 3
   _rangeForPlayerInput: 1.5
