@@ -34,11 +34,16 @@ namespace GGJ.Scripts
 
             _audioSource = GetComponent<AudioSource>();
 
-            // _disposableObserver = InputController.Instance.FireChanges.Subscribe(OnFirePressed);
+            InputController.Instance.FireChanges.Subscribe(OnFirePressed);
         }
 
         private void OnFirePressed(EFire firePressed)
         {
+            if (this == null)
+            {
+                return;
+            }
+            
             if (firePressed.ToString().Equals(_singleNoteConfiguration.button))
             {
                 _audioSource.PlayOneShot(_singleNoteConfiguration.Note);

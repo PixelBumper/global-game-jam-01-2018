@@ -232,7 +232,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -298,6 +298,11 @@ Prefab:
     - target: {fileID: 1756740599301070, guid: 02f6874f53ea54bf98c0e7c81d1df3cd, type: 2}
       propertyPath: m_Name
       value: DancingSymbolC
+      objectReference: {fileID: 0}
+    - target: {fileID: 82306983321287796, guid: 02f6874f53ea54bf98c0e7c81d1df3cd,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 02f6874f53ea54bf98c0e7c81d1df3cd, type: 2}
@@ -442,6 +447,11 @@ Prefab:
     - target: {fileID: 1756740599301070, guid: 02f6874f53ea54bf98c0e7c81d1df3cd, type: 2}
       propertyPath: m_Name
       value: DancingSymbolB
+      objectReference: {fileID: 0}
+    - target: {fileID: 82306983321287796, guid: 02f6874f53ea54bf98c0e7c81d1df3cd,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 02f6874f53ea54bf98c0e7c81d1df3cd, type: 2}
