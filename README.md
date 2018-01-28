@@ -1,4 +1,7 @@
-# global-game-jam-01-2018
+# One Last Whisper
+You were born with the gift: you can communicate with the world of the living and the world of the dead. Your mission will be transmitting the last words of the ghosts to their loved ones.
+
+https://pixelbumper.itch.io/one-last-whisper
 
 ## Requirements
 Unity 2017.3.0f3
