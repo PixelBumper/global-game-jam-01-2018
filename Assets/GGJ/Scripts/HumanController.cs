@@ -18,7 +18,6 @@ public class HumanController : MonoBehaviour
     private AudioSource _audioSource;
     private SphereCollider _sphereCollider;
     private bool _canMumble = true;
-    private IDisposable _dispisable;
 
     // Use this for initialization
     private void Start()
@@ -40,8 +39,7 @@ public class HumanController : MonoBehaviour
             {
                 _canMumble = false;
 
-                _dispisable = Observable.Interval(TimeSpan.FromSeconds(_mumblingSound.length))
-                    .Subscribe(_ => { }, Debug.LogException, OnMumbleFinished);
+                Invoke("OnMumbleFinished", _mumblingSound.length);
 
                 _audioSource.PlayOneShot(_mumblingSound);
             }
@@ -52,14 +50,6 @@ public class HumanController : MonoBehaviour
     {
         Debug.Log("OnMumbleFinished");
         _canMumble = true;
-    }
-
-    private void OnDestroy()
-    {
-        if(_dispisable != null)
-        {
-            _dispisable.Dispose();
-        }
     }
 
     public void SetMumbling(AudioClip mumble)
