@@ -30,6 +30,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+WebGLBuild/
 
 # ============ #
 # OS generated #
@@ -41,3 +42,6 @@ sysinfo.txt
 ehthumbs.db
 [Tt]humbs.db
 [Dd]esktop.ini
+
+# Logs
+unity.log
