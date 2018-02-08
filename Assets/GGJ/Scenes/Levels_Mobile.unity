@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 148592952}
   - component: {fileID: 148592954}
   - component: {fileID: 148592953}
+  - component: {fileID: 148592955}
   m_Layer: 0
   m_Name: Star
   m_TagString: Untagged
@@ -194,8 +195,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AutoStart: 1
-  Loop: 2
   Duration: 1
+  Delay: 0
+  IsLooping: 1
+  LoopType: 1
+  EasingType: 10
+  OnPlayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnRewindEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnStepCompleteEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  InitialValue: {x: 1, y: 1, z: 1}
   EndValue: {x: 1.2, y: 1.2, z: 1.2}
 --- !u!212 &148592954
 SpriteRenderer:
@@ -241,6 +261,40 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &148592955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 148592951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff33d41a3d4c9f9438d013167a8a10f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AutoStart: 1
+  Duration: 1
+  Delay: 0
+  IsLooping: 1
+  LoopType: 1
+  EasingType: 12
+  OnPlayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnRewindEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnStepCompleteEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  InitialValue: 1
+  EndValue: 0
 --- !u!1 &236951582
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,8 +468,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 306068091}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 542, y: 305, z: 0}
-  m_LocalScale: {x: 0.56458336, y: 0.56458336, z: 0.56458336}
+  m_LocalPosition: {x: 385.5, y: 217, z: 0}
+  m_LocalScale: {x: 0.4015625, y: 0.4015625, z: 0.4015625}
   m_Children:
   - {fileID: 465361145}
   - {fileID: 1479916003}
@@ -513,7 +567,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 465361144}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.000030517578, y: 416.62137, z: 0}
+  m_LocalPosition: {x: -0.000030517578, y: 416.789, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1019124001}
@@ -522,7 +576,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.000041962, y: -123.6}
+  m_AnchoredPosition: {x: -0.000041962005, y: -123.6001}
   m_SizeDelta: {x: 842.2, y: 180.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &465361146
