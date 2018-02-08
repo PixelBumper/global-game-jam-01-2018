@@ -1,59 +1,20 @@
 ﻿using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class TweenScale : MonoBehaviour
+public class TweenScale : MonoTween
 {
-    public enum LoopType
-    {
-        NoLoop,
-        Repeat,
-        Yoyo,
-    }
-
-    public enum LoopState
-    {
-        Forward,
-        Backward,
-    }
-
-    public bool AutoStart = true;
-    public LoopType Loop = LoopType.NoLoop;
-    public float Duration = 1;
+    [Header("Scale")]
+    public Vector3 InitialValue = Vector3.one;
     public Vector3 EndValue = Vector3.one;
-    private Vector3 _initialValue;
-    private Vector3 _targetValue;
-    private LoopState _state = LoopState.Forward;
 
-    private void Start ()
+    protected override void Start()
     {
-        _initialValue = transform.localScale;
-        _targetValue = EndValue;
-        if (AutoStart)
-        {
-            StartTween();
-        }
-	}
-    
-    public void StartTween()
-    {
-        var tweener = transform.DOScale(_targetValue, Duration);
-        tweener.Play();
-        tweener.onComplete = TweenCompleted;
+        transform.localScale = InitialValue;
+        base.Start();
     }
 
-    private void TweenCompleted()
+    protected override Tweener GetTweener()
     {
-        switch(Loop)
-        {
-            case LoopType.Repeat:
-                StartTween();
-                break;
-            case LoopType.Yoyo:
-                _state = _state == LoopState.Forward ? LoopState.Backward : LoopState.Forward;
-                _targetValue = _state == LoopState.Forward ? EndValue : _initialValue;
-                StartTween();
-                break;
-        }
+        return transform.DOScale(EndValue, Duration);
     }
 }
