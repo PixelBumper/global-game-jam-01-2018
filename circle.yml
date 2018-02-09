@@ -1,0 +1,10 @@
+machine:
+dependencies:
+  pre:
+    - gem install bundler --pre
+  override:
+    - ./Scripts/install.sh
+    - ./Scripts/build.sh
+test:
+  override:
+    - echo nope
