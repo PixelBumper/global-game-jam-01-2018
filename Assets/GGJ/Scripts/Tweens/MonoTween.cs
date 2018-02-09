@@ -18,16 +18,6 @@ public abstract class MonoTween : MonoBehaviour
 
     protected virtual void Start()
     {
-        _tweener = GetTweener();
-        _tweener.SetDelay(Delay);
-        _tweener.SetAutoKill(false);
-        _tweener.SetLoops(IsLooping ? -1 : 0, LoopType);
-        _tweener.SetEase(EasingType);
-
-        _tweener.onPlay = OnPlay;
-        _tweener.onRewind = OnRewind;
-        _tweener.onStepComplete = OnStepComplete;
-
         if (AutoStart)
         {
             Play();
@@ -36,6 +26,19 @@ public abstract class MonoTween : MonoBehaviour
 
     public void Play()
     {
+        if(_tweener == null)
+        {
+            _tweener = GetTweener();
+            _tweener.Pause();
+            _tweener.SetDelay(Delay);
+            _tweener.SetAutoKill(false);
+            _tweener.SetLoops(IsLooping ? -1 : 0, LoopType);
+            _tweener.SetEase(EasingType);
+            _tweener.onPlay = OnPlay;
+            _tweener.onRewind = OnRewind;
+            _tweener.onStepComplete = OnStepComplete;
+        }
+
         _tweener.PlayForward();
     }
 

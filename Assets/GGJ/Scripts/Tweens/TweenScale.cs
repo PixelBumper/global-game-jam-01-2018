@@ -7,14 +7,9 @@ public class TweenScale : MonoTween
     public Vector3 InitialValue = Vector3.one;
     public Vector3 EndValue = Vector3.one;
 
-    protected override void Start()
-    {
-        transform.localScale = InitialValue;
-        base.Start();
-    }
-
     protected override Tweener GetTweener()
     {
+        transform.localScale = InitialValue;
         return transform.DOScale(EndValue, Duration);
     }
 }
